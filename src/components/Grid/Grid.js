@@ -8,7 +8,23 @@ function Grid(props) {
   // it can also update the GridCreator component details, which will update its size, colors, and data
 
   const gridColors = props.gridColors.map((color, index) => {
-    return <GridColor background={color} key={index} />
+    if (props.selectedColorIndex === index) {
+      return <GridColor 
+            background={color} 
+            key={index}
+            colorIndex={index}
+            selected={"true"} 
+            onColorClick={props.onColorClick}
+          />
+    } else {
+      return <GridColor 
+              background={color} 
+              key={index}
+              colorIndex={index}
+              selected={"false"}
+              onColorClick={props.onColorClick} 
+            />
+    }
   })
 
   // create a row, then fill with box divs based on columns

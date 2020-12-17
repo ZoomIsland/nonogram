@@ -10,6 +10,11 @@ class GridCreator extends Component {
     gridAnswer: [],
     selectedColorIndex: 0
   }
+
+  onColorClick = (index) => {
+    this.setState({selectedColorIndex: index})
+  }
+
   render() {
     return (
       <div>
@@ -19,7 +24,9 @@ class GridCreator extends Component {
           gridHeight={this.state.gridHeight}
           gridWidth={this.state.gridWidth}
           gridColors={this.state.gridColors}
-          gridAnswer={this.state.gridAnswer} />
+          selectedColorIndex={this.state.selectedColorIndex}
+          gridAnswer={this.state.gridAnswer}
+          onColorClick={this.onColorClick} />
       </div>
     )
   }

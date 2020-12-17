@@ -1,5 +1,12 @@
+/* eventually, base these on a general size, so that +/- buttons can be implemented */
+
 .gridColor {
   border: 1px solid black;
-  height: 25px;
-  width: 25px;
+  height: 40px;
+  width: 40px;
+}
+
+.selectedColor {
+  height: 60px;
+  width: 60px;
 }
