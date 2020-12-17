@@ -4,9 +4,29 @@
   border: 1px solid black;
   height: 40px;
   width: 40px;
+  cursor: pointer;
 }
 
 .selectedColor {
   height: 60px;
   width: 60px;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.editBtn {
+  background: rgba(255,255,255,.75);
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+}
+.editBtn:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
 }

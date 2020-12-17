@@ -1,11 +1,22 @@
 import './GridColor.css';
 
 function GridColor(props) {
+  function displayOnHover() {
+    if (props.hover === true) {
+      return "";
+    } else {
+      return "hidden";
+    }
+  }
+
   if (props.selected === "true") {
     return <div 
             className="gridColor selectedColor" 
             style={{backgroundColor: props.background}}
-            onClick={() => props.onColorClick(props.colorIndex)}>
+            onClick={() => props.onColorClick(props.colorIndex)}
+            onMouseEnter={props.onMouseEnter}
+            onMouseLeave={props.onMouseLeave}>
+              <div className={"editBtn " + displayOnHover()} onClick={props.onEditClick}>Edit</div>
           </div>
   }
   return (

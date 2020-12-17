@@ -1,4 +1,5 @@
-import GridColor from '../GridColor/GridColor';
+// import GridColor from '../GridColor/GridColor';
+import ColorChooser from '../../containers/ColorChooser';
 import GridRow from '../GridRow';
 
 import './Grid.css';
@@ -9,7 +10,7 @@ function Grid(props) {
 
   const gridColors = props.gridColors.map((color, index) => {
     if (props.selectedColorIndex === index) {
-      return <GridColor 
+      return <ColorChooser 
             background={color} 
             key={index}
             colorIndex={index}
@@ -17,7 +18,7 @@ function Grid(props) {
             onColorClick={props.onColorClick}
           />
     } else {
-      return <GridColor 
+      return <ColorChooser 
               background={color} 
               key={index}
               colorIndex={index}
@@ -31,7 +32,7 @@ function Grid(props) {
   const gridActual = () => {
     let gridActual =[];
     for (let i = 0; i < props.gridHeight; i++) {
-      gridActual.push(<GridRow columns={props.gridWidth} />)
+      gridActual.push(<GridRow key={i} columns={props.gridWidth} />)
     }
     return gridActual;
   }
