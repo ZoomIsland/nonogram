@@ -6,10 +6,12 @@ function GridActual(props) {
       <div className="gridRow" key={`row${rowIndex}`}>
         {row.map((column, columnIndex) => <GridBox 
                                           key={`r${rowIndex}c${columnIndex}`} 
-                                          position={`r${rowIndex}c${columnIndex}`} 
-                                          onBoxClick={props.onBoxClick}
+                                          position={`r${rowIndex}c${columnIndex}`}
                                           gridColors={props.gridColors}
-                                          colorData={column} />)}
+                                          colorData={column}
+                                          onMouseDownOnBox={props.onMouseDownOnBox}
+                                          onMouseEnterBox={props.onMouseEnterBox}
+                                          onMouseUpOnBox={props.onMouseUpOnBox} />)}
       </div>
     )
   })

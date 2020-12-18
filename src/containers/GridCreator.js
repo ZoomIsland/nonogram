@@ -8,7 +8,8 @@ class GridCreator extends Component {
     gridWidth: 15,
     gridColors: ['black', 'red', 'yellow'],
     gridAnswer: [],
-    selectedColorIndex: 0
+    selectedColorIndex: 0,
+    startDraw: ""
   }
 
   componentDidMount = () => {
@@ -30,24 +31,83 @@ class GridCreator extends Component {
     this.setState({selectedColorIndex: index})
   }
 
-  onBoxClick = (e) => {
-    console.log(e.target.id)
-    const position = e.target.id;
-    const midpoint = position.indexOf("c");
-    const row = parseInt(position.substring(1, midpoint));
-    const column = parseInt(position.substring(midpoint + 1, position.length));
-    console.log([row, column]);
-
-    const updatedAnswer = [...this.state.gridAnswer];
-    updatedAnswer[row][column] = this.state.selectedColorIndex;
-
-    this.setState({gridAnswer: updatedAnswer})
-
-
-    // should do two things:
-    //update the gridAnswer with the selectedColorIndex at the appropriate position
-    //update the box itself with the appropriate color
+  parsePosition = (positionStr) => {
+    const positionObj = {}
+    const midpoint = positionStr.indexOf("c");
+    const row = parseInt(positionStr.substring(1, midpoint));
+    const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
+    positionObj.row = row;
+    positionObj.column = column;
+    return positionObj;
   }
+
+  onMouseDownOnBox = (e) => {
+    // this should setState on startDraw
+    this.setState({startDraw: e.target.id})
+    console.log(e.target.id);
+  }
+
+  onMouseEnterBox = (e) => {
+    if (this.state.startDraw.length) {
+      console.log(e.target.id);
+    }
+    //this will make an temp array to pass into the grid
+    //it will only update if row or column ===
+    
+  }
+
+  onMouseUpOnBox = (e) => {
+    // this should finalize endDraw;
+    const endDraw = e.target.id;
+    // it will setState of gridAnswer;
+    if (this.state.startDraw === endDraw) {
+      const position = this.parsePosition(this.state.startDraw);
+
+      const updatedAnswer = [...this.state.gridAnswer];
+      updatedAnswer[position.row][position.column] = this.state.selectedColorIndex;
+      this.setState({gridAnswer: updatedAnswer})
+    } else {
+      const startObj = this.parsePosition(this.state.startDraw);
+      const endObj = this.parsePosition(endDraw);
+      const updatedAnswer = [...this.state.gridAnswer];
+
+      // rows match, so the row can be updated
+      console.log ("rows match");
+      if (startObj.row === endObj.row) {
+        // for loop, start is startObj.column, end is endObj.column;
+        if (startObj.column > endObj.column) {
+          for (let i = endObj.column; i <= startObj.column; i++) {
+            updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
+          }
+        } else {
+          for (let i = startObj.column; i <= endObj.column; i++) {
+            updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
+          }
+        }
+        
+
+      // columns match, so the column can be updated
+      } else if (startObj.column === endObj.column) {
+        console.log("columns match");
+        // for loop, start is startObj.row, end is endObj.row;
+        if (startObj.row > endObj.row) {
+          for (let i = endObj.row; i <= startObj.row; i++) {
+            updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
+          }
+        } else {
+          for (let i = startObj.row; i <= endObj.row; i++) {
+            updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
+          }
+        }
+      }
+    }
+
+    // it will clear startDraw and endDraw;
+    this.setState({startDraw: ""})
+    console.log(e.target.id);
+  }
+
+  
 
   render() {
     return (
@@ -61,7 +121,9 @@ class GridCreator extends Component {
           selectedColorIndex={this.state.selectedColorIndex}
           gridAnswer={this.state.gridAnswer}
           onColorClick={this.onColorClick}
-          onBoxClick={this.onBoxClick} />
+          onMouseDownOnBox={this.onMouseDownOnBox}
+          onMouseEnterBox={this.onMouseEnterBox}
+          onMouseUpOnBox={this.onMouseUpOnBox} />
       </div>
     )
   }

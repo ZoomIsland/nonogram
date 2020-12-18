@@ -6,7 +6,14 @@ function GridBox(props) {
   }
 
   return (
-    <div className="gridBox" id={props.position} onClick={props.onBoxClick} style={boxStyle}></div>
+    <div 
+      className="gridBox" 
+      id={props.position}
+      onMouseDown={props.onMouseDownOnBox}
+      onMouseEnter={props.onMouseEnterBox}
+      onMouseUp={props.onMouseUpOnBox}
+      style={boxStyle}>
+    </div>
   )
 }
 
