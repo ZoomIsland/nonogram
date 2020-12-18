@@ -6,7 +6,7 @@ class GridCreator extends Component {
   state = {
     gridHeight: 15,
     gridWidth: 15,
-    gridColors: ['black', 'red', 'yellow'],
+    gridColors: ['white','black', 'red', 'yellow','green'],
     gridAnswer: [],
     selectedColorIndex: 0,
     startDraw: ""
@@ -31,81 +31,98 @@ class GridCreator extends Component {
     this.setState({selectedColorIndex: index})
   }
 
-  parsePosition = (positionStr) => {
-    const positionObj = {}
+  onColorChange = (color) => {
+    console.log(color.hex);
+    let colorArray = [...this.state.gridColors];
+    colorArray[this.state.selectedColorIndex] = color.hex;
+    this.setState({gridColors: colorArray});
+  }
+
+  parsePositionAndSetState = (positionStr) => {
+    // const positionObj = {}
     const midpoint = positionStr.indexOf("c");
     const row = parseInt(positionStr.substring(1, midpoint));
     const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
-    positionObj.row = row;
-    positionObj.column = column;
-    return positionObj;
+
+    // positionObj.row = row;
+    // positionObj.column = column;
+    // return positionObj;
+
+    const updatedAnswer = [...this.state.gridAnswer];
+    updatedAnswer[row][column] = this.state.selectedColorIndex;
+    this.setState({gridAnswer: updatedAnswer})
   }
 
   onMouseDownOnBox = (e) => {
     // this should setState on startDraw
     this.setState({startDraw: e.target.id})
+    this.parsePositionAndSetState(e.target.id);
     console.log(e.target.id);
   }
 
   onMouseEnterBox = (e) => {
     if (this.state.startDraw.length) {
       console.log(e.target.id);
-    }
-    //this will make an temp array to pass into the grid
-    //it will only update if row or column ===
-    
+      this.parsePositionAndSetState(e.target.id)
+    }    
   }
 
-  onMouseUpOnBox = (e) => {
-    // this should finalize endDraw;
-    const endDraw = e.target.id;
-    // it will setState of gridAnswer;
-    if (this.state.startDraw === endDraw) {
-      const position = this.parsePosition(this.state.startDraw);
+  onMouseUpOnBox = () => {
+    this.setState({startDraw: ""})
+  }
 
-      const updatedAnswer = [...this.state.gridAnswer];
-      updatedAnswer[position.row][position.column] = this.state.selectedColorIndex;
-      this.setState({gridAnswer: updatedAnswer})
-    } else {
-      const startObj = this.parsePosition(this.state.startDraw);
-      const endObj = this.parsePosition(endDraw);
-      const updatedAnswer = [...this.state.gridAnswer];
+  //this is probably a great tool for the player
+  // for the Creator, it should probably just be the mouseenter changing things.
+  // onMouseUpOnBox = (e) => {
+  //   // this should finalize endDraw;
+  //   const endDraw = e.target.id;
+  //   // it will setState of gridAnswer;
+  //   if (this.state.startDraw === endDraw) {
+  //     const position = this.parsePosition(this.state.startDraw);
 
-      // rows match, so the row can be updated
-      console.log ("rows match");
-      if (startObj.row === endObj.row) {
-        // for loop, start is startObj.column, end is endObj.column;
-        if (startObj.column > endObj.column) {
-          for (let i = endObj.column; i <= startObj.column; i++) {
-            updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
-          }
-        } else {
-          for (let i = startObj.column; i <= endObj.column; i++) {
-            updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
-          }
-        }
+  //     const updatedAnswer = [...this.state.gridAnswer];
+  //     updatedAnswer[position.row][position.column] = this.state.selectedColorIndex;
+  //     this.setState({gridAnswer: updatedAnswer})
+  //   } else {
+  //     const startObj = this.parsePosition(this.state.startDraw);
+  //     const endObj = this.parsePosition(endDraw);
+  //     const updatedAnswer = [...this.state.gridAnswer];
+
+  //     // rows match, so the row can be updated
+  //     console.log ("rows match");
+  //     if (startObj.row === endObj.row) {
+  //       // for loop, start is startObj.column, end is endObj.column;
+  //       if (startObj.column > endObj.column) {
+  //         for (let i = endObj.column; i <= startObj.column; i++) {
+  //           updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
+  //         }
+  //       } else {
+  //         for (let i = startObj.column; i <= endObj.column; i++) {
+  //           updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
+  //         }
+  //       }
         
 
-      // columns match, so the column can be updated
-      } else if (startObj.column === endObj.column) {
-        console.log("columns match");
-        // for loop, start is startObj.row, end is endObj.row;
-        if (startObj.row > endObj.row) {
-          for (let i = endObj.row; i <= startObj.row; i++) {
-            updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
-          }
-        } else {
-          for (let i = startObj.row; i <= endObj.row; i++) {
-            updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
-          }
-        }
-      }
-    }
+  //     // columns match, so the column can be updated
+  //     } else if (startObj.column === endObj.column) {
+  //       console.log("columns match");
+  //       // for loop, start is startObj.row, end is endObj.row;
+  //       if (startObj.row > endObj.row) {
+  //         for (let i = endObj.row; i <= startObj.row; i++) {
+  //           updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
+  //         }
+  //       } else {
+  //         for (let i = startObj.row; i <= endObj.row; i++) {
+  //           updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
+  //         }
+  //       }
+  //     }
+  //   }
 
-    // it will clear startDraw and endDraw;
-    this.setState({startDraw: ""})
-    console.log(e.target.id);
-  }
+  //   // it will clear startDraw and endDraw;
+  //   this.setState({startDraw: ""})
+  //   console.log(e.target.id);
+  // }
 
   
 
@@ -121,6 +138,7 @@ class GridCreator extends Component {
           selectedColorIndex={this.state.selectedColorIndex}
           gridAnswer={this.state.gridAnswer}
           onColorClick={this.onColorClick}
+          onColorChange={this.onColorChange}
           onMouseDownOnBox={this.onMouseDownOnBox}
           onMouseEnterBox={this.onMouseEnterBox}
           onMouseUpOnBox={this.onMouseUpOnBox} />

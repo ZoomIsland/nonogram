@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.addColor {
+  cursor: pointer;
+}
+
 .gridRow {
   height: 25px;
   display: flex;

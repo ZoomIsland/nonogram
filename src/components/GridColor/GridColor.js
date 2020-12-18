@@ -12,7 +12,7 @@ function GridColor(props) {
   if (props.selected === "true") {
     return <div 
             className="gridColor selectedColor" 
-            style={{backgroundColor: props.background}}
+            style={{backgroundColor: props.color}}
             onClick={() => props.onColorClick(props.colorIndex)}
             onMouseEnter={props.onMouseEnter}
             onMouseLeave={props.onMouseLeave}>
@@ -22,7 +22,7 @@ function GridColor(props) {
   return (
     <div 
       className="gridColor" 
-      style={{backgroundColor: props.background}}
+      style={{backgroundColor: props.color}}
       onClick={() => props.onColorClick(props.colorIndex)}>
     </div>
   )

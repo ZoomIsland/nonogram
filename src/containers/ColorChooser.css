@@ -1,0 +1,18 @@
+.creatorColorContainer {
+  position: relative;
+}
+
+.popover {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  z-index: 2;
+}
+
+.cover {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
