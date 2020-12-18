@@ -35,7 +35,10 @@ function Grid(props) {
       <div className="gridColors">
         {gridColors}
       </div>
-      <GridActual gridAnswer={props.gridAnswer} />
+      <GridActual 
+        gridAnswer={props.gridAnswer} 
+        onBoxClick={props.onBoxClick}
+        gridColors={props.gridColors} />
     </div>
   )
 }
