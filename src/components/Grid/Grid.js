@@ -1,6 +1,7 @@
 // import GridColor from '../GridColor/GridColor';
 import ColorChooser from '../../containers/ColorChooser';
-import GridRow from '../GridRow';
+// import GridRow from '../GridRow';
+import GridActual from '../GridActual';
 
 import './Grid.css';
 
@@ -28,23 +29,13 @@ function Grid(props) {
     }
   })
 
-  // create a row, then fill with box divs based on columns
-  const gridActual = () => {
-    let gridActual =[];
-    for (let i = 0; i < props.gridHeight; i++) {
-      gridActual.push(<GridRow key={i} columns={props.gridWidth} />)
-    }
-    return gridActual;
-  }
 
   return (
     <div className="fullGrid">
       <div className="gridColors">
         {gridColors}
       </div>
-      <div className="gridActual">
-        {gridActual()}
-      </div>
+      <GridActual gridAnswer={props.gridAnswer} />
     </div>
   )
 }

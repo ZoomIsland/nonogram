@@ -1,6 +1,6 @@
-function GridBox() {
+function GridBox(props) {
   return (
-    <div className="gridBox"></div>
+    <div className="gridBox" id={props.position}></div>
   )
 }
 
