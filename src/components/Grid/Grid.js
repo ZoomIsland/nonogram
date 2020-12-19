@@ -16,6 +16,8 @@ function Grid(props) {
             selected={"true"}
             onColorChange={props.onColorChange} 
             onColorClick={props.onColorClick}
+            editingColor={props.editingColor}
+            onColorEditorClose={props.onColorEditorClose}
           />
     } else {
       return <ColorChooser 
@@ -25,6 +27,7 @@ function Grid(props) {
               selected={"false"}
               onColorChange={props.onColorChange} 
               onColorClick={props.onColorClick} 
+              onColorEditorClose={props.onColorEditorClose}
             />
     }
   })
@@ -34,9 +37,11 @@ function Grid(props) {
     <div className="fullGrid">
       <div className="gridColors">
         {gridColors}
-        <div className="addColor">
-          <i className="fas fa-plus-circle fa-2x"></i>
-        </div>
+        {props.gridColors.length <= 8 &&
+          <div className="addColor" onClick={props.onAddColorClick}>
+            <i className="fas fa-plus-circle fa-2x"></i>
+          </div>
+        }
       </div>
       <GridActual 
         gridAnswer={props.gridAnswer}

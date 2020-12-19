@@ -6,9 +6,10 @@ class GridCreator extends Component {
   state = {
     gridHeight: 15,
     gridWidth: 15,
-    gridColors: ['white','black', 'red', 'yellow','green'],
+    gridColors: ['#FFFFFF'],
     gridAnswer: [],
     selectedColorIndex: 0,
+    editingColor: false,
     startDraw: ""
   }
 
@@ -27,8 +28,26 @@ class GridCreator extends Component {
     this.setState({gridAnswer: gridArray});
   }
 
+  onAddColorClick = () => {
+    console.log("plus clicked!");
+    let colorArray = [...this.state.gridColors];
+    colorArray.push("#FFFFFF");
+    this.setState({gridColors: colorArray});
+    this.setState({selectedColorIndex: colorArray.length - 1});
+  }
+
   onColorClick = (index) => {
-    this.setState({selectedColorIndex: index})
+    if (index !== this.state.selectedColorIndex) {
+      this.setState({selectedColorIndex: index})
+    } else {
+      // open the color editor
+      console.log("editor opens")
+      this.setState({editingColor: true});
+    }
+  }
+
+  onColorEditorClose = () => {
+    this.setState({editingColor: false})
   }
 
   onColorChange = (color) => {
@@ -137,8 +156,11 @@ class GridCreator extends Component {
           gridColors={this.state.gridColors}
           selectedColorIndex={this.state.selectedColorIndex}
           gridAnswer={this.state.gridAnswer}
+          onAddColorClick={this.onAddColorClick}
           onColorClick={this.onColorClick}
+          editingColor={this.state.editingColor}
           onColorChange={this.onColorChange}
+          onColorEditorClose={this.onColorEditorClose}
           onMouseDownOnBox={this.onMouseDownOnBox}
           onMouseEnterBox={this.onMouseEnterBox}
           onMouseUpOnBox={this.onMouseUpOnBox} />

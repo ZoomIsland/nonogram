@@ -13,6 +13,9 @@
   display: flex;
   align-items: flex-end;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .editBtn {
@@ -21,12 +24,21 @@
   font-weight: bold;
   cursor: pointer;
   overflow: hidden;
-  width: 100%;
-}
-.editBtn:hover {
-  text-decoration: underline;
+  width: 90%;
+  height: 90%;
+  opacity: 0;
+  transition: 250ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hidden {
-  display: none;
+.editBtn p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.selectedColor:hover .editBtn {
+  opacity: 1; 
 }

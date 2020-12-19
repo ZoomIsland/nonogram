@@ -7,8 +7,7 @@ import GridColor from '../components/GridColor/GridColor'
 
 class ColorChooser extends Component {
   state={
-    hover: false,
-    editingColor: false
+    hover: false
   }
 
   onMouseEnter = () => {
@@ -17,15 +16,6 @@ class ColorChooser extends Component {
 
   onMouseLeave = () => {
     this.setState({hover: false});
-  }
-
-  onEditClick = () => {
-    console.log("clicked edit");
-    this.setState({editingColor: true});
-  }
-
-  handlePickerClose = () => {
-    this.setState({editingColor: false});
   }
 
   render() {
@@ -38,12 +28,11 @@ class ColorChooser extends Component {
                 onColorClick={this.props.onColorClick}
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
-                onEditClick={this.onEditClick}
                 hover={this.state.hover}
               />
-        { this.state.editingColor ? <div className="popover"> 
+        { this.props.editingColor ? <div className="popover"> 
             <div className="cover" 
-                 onClick={this.handlePickerClose} /> 
+                 onClick={this.props.onColorEditorClose} /> 
             <ChromePicker 
               disableAlpha={true}
               color={this.props.color}
