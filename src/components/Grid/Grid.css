@@ -6,8 +6,13 @@
   cursor: pointer;
 }
 
+/* .gridActual in GridActul.js
+  position: relative;
+  width: changes with columns */
+
 .gridRow {
   height: 25px;
+  width: auto;
   display: flex;
 }
 .gridBox {
@@ -15,4 +20,32 @@
   width: 25px;
   background: white;
   border: 1px solid black;
+}
+
+/* plus/minus row/column control */
+.columnControl, .rowControl, .controlMinus, .controlPlus {
+  position: absolute;
+  cursor: pointer;
+}
+.columnControl {
+  right: -50px;
+  top: 0px;
+}
+.rowControl {
+  transform: rotate(90deg);
+  left: 0px;
+  bottom: -50px;
+}
+.controlMinus, .controlPlus {
+  color: white;
+  font-size: 20px;
+}
+.controlMinus {
+  top: 10px;
+  left: 4px;
+  font-size: 22px;
+}
+.controlPlus {
+  top: 12px;
+  right: 3px;
 }

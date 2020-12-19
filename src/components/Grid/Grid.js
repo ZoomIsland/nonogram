@@ -45,6 +45,10 @@ function Grid(props) {
       </div>
       <GridActual 
         gridAnswer={props.gridAnswer}
+        onColumnPlus={props.onColumnPlus}
+        onColumnMinus={props.onColumnMinus}
+        onRowPlus={props.onRowPlus}
+        onRowMinus={props.onRowMinus}
         onMouseDownOnBox={props.onMouseDownOnBox}
         onMouseEnterBox={props.onMouseEnterBox}
         onMouseUpOnBox={props.onMouseUpOnBox}

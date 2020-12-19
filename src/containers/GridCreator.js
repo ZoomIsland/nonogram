@@ -73,15 +73,44 @@ class GridCreator extends Component {
     this.setState({gridColors: colorArray});
   }
 
+  // I'll likely want to revise this to an onDrag for each
+  // where it removes the visibility of the column/row at first
+  // then modifies on mouseup
+  onColumnPlus = () => {
+    let answerArray = [...this.state.gridAnswer];
+    for (let i = 0; i < answerArray.length; i++) {
+      answerArray[i].push("X");
+    }
+    this.setState({gridAnswer: answerArray});
+  }
+  onColumnMinus = () => {
+    // if (this.state.gridAnswer[0].length > 5) {
+      let answerArray = [...this.state.gridAnswer];
+      for (let i = 0; i < answerArray.length; i++) {
+        answerArray[i].pop();
+      }
+      this.setState({gridAnswer: answerArray});
+    // }
+  }
+  onRowPlus = () => {
+    let newRow = [];
+    let answerArray = [...this.state.gridAnswer];
+    for (let i = 0; i < answerArray[0].length; i++) {
+      newRow.push("X");
+    }
+    answerArray.push(newRow);
+    this.setState({gridAnswer: answerArray});
+  }
+  onRowMinus = () => {
+    let answerArray = [...this.state.gridAnswer];
+    answerArray.pop();
+    this.setState({gridAnswer: answerArray});
+  }
+
   parsePositionAndSetState = (positionStr) => {
-    // const positionObj = {}
     const midpoint = positionStr.indexOf("c");
     const row = parseInt(positionStr.substring(1, midpoint));
     const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
-
-    // positionObj.row = row;
-    // positionObj.column = column;
-    // return positionObj;
 
     const updatedAnswer = [...this.state.gridAnswer];
     updatedAnswer[row][column] = this.state.selectedColorIndex;
@@ -89,7 +118,6 @@ class GridCreator extends Component {
   }
 
   onMouseDownOnBox = (e) => {
-    // this should setState on startDraw
     this.setState({startDraw: e.target.id})
     this.parsePositionAndSetState(e.target.id);
     console.log(e.target.id);
@@ -179,7 +207,11 @@ class GridCreator extends Component {
           onColorEditorClose={this.onColorEditorClose}
           onMouseDownOnBox={this.onMouseDownOnBox}
           onMouseEnterBox={this.onMouseEnterBox}
-          onMouseUpOnBox={this.onMouseUpOnBox} />
+          onMouseUpOnBox={this.onMouseUpOnBox}
+          onColumnPlus={this.onColumnPlus}
+          onColumnMinus={this.onColumnMinus}
+          onRowPlus={this.onRowPlus}
+          onRowMinus={this.onRowMinus} />
       </div>
     )
   }
