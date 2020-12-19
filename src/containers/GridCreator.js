@@ -28,12 +28,28 @@ class GridCreator extends Component {
     this.setState({gridAnswer: gridArray});
   }
 
+  getRandomColor = () => {
+    // function that returns a random hex value;
+    let colorConstructor = "#";
+
+    const hexValues ="0123456789ABCDEF";
+    for (let i = 0; i < 6; i++) {
+      let randIndex = Math.floor(Math.random() * hexValues.length);
+      let chosenVal = hexValues.charAt(randIndex);
+      colorConstructor += chosenVal;
+    }
+    console.log(colorConstructor)
+    return colorConstructor;
+  }
+
   onAddColorClick = () => {
     console.log("plus clicked!");
     let colorArray = [...this.state.gridColors];
-    colorArray.push("#FFFFFF");
+    const randomHex = this.getRandomColor();
+    colorArray.push(randomHex);
     this.setState({gridColors: colorArray});
     this.setState({selectedColorIndex: colorArray.length - 1});
+    this.setState({editingColor: true});
   }
 
   onColorClick = (index) => {
