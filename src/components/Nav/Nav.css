@@ -2,6 +2,8 @@ header {
   display: flex;
   justify-content: space-between;
   font-family: Helvetica, sans-serif;
+  background: slategray;
+  padding: 5px 10px;
 }
 
 .siteTitle {
@@ -12,4 +14,8 @@ header {
   display: flex;
   align-items: center;
   font-size: 24px;
+}
+
+.lineDivide {
+  font-weight: lighter;
 }
