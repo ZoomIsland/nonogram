@@ -7,13 +7,19 @@ function Nav() {
     <header>
       <div className="siteTitle">Nono Yaya</div>
       <div className="navLinks">
-        <div className="allPuzzles">Puzzle Index</div>
+        <NavLink to="/nonograms/index">
+          <div className="allPuzzles">Puzzle Index</div>
+        </NavLink>
         <span className="lineDivide">&nbsp;|&nbsp;</span>
-        <div className="randomPuzzle">Random Puzzle</div>
+        <NavLink to="/nonograms/random">
+          <div className="randomPuzzle">Random Puzzle</div>
+        </NavLink>
         <span className="lineDivide">&nbsp;|&nbsp;</span>
 
         {/* below is "logged in" version */}
-        <div className="newPuzzle">Create New</div>
+        <NavLink to="/nonograms/new">
+          <div className="newPuzzle">Create New</div>
+        </NavLink>
         <span className="lineDivide">&nbsp;|&nbsp;</span>
         <div className="logoutBtn">Logout</div>
 
