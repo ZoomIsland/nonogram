@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  font-family: Helvetica, sans-serif;
+}
+
+.siteTitle {
+  font-size: 36px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
