@@ -21,7 +21,7 @@ function GridActual(props) {
       position: "relative"
     }
     if (props.gridAnswer.length) {
-      console.log(props.gridAnswer)
+      // console.log(props.gridAnswer)
       const calcWidth = (props.gridAnswer[0].length * 25).toString() + "px";
       style.width = calcWidth;
     } else {

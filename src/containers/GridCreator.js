@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 
 import Grid from '../components/Grid/Grid'
 
+import './GridCreator.css';
+
 class GridCreator extends Component {
   state = {
+    nonogramName: "Untitled Nonogram",
     gridHeight: 15,
     gridWidth: 15,
     gridColors: ['#FFFFFF'],
@@ -20,12 +23,31 @@ class GridCreator extends Component {
     for (let i = 0; i < this.state.gridHeight; i++) {
       let rowArray = [];
       for (let j = 0; j < this.state.gridWidth; j++) {
-        rowArray.push(["X"]);
+        rowArray.push("X");
       }
       gridArray.push(rowArray)
     }
-    console.log(gridArray)
+    // console.log(gridArray)
     this.setState({gridAnswer: gridArray});
+  }
+
+  onTitleChange = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  onSubmit = () => {
+    // construct object for submission
+    // this will need user info eventually
+    const newNono = {
+      title: this.state.nonogramName,
+      height: this.state.gridHeight,
+      width: this.state.gridWidth,
+      nonogramString: this.state.gridAnswer.flat().join(''),
+      colorArray: this.state.gridColors,
+    }
+    console.log(newNono);
+    // send object to api
+    // reroute page to Show page of that Nonogram?
   }
 
   getRandomColor = () => {
@@ -38,12 +60,12 @@ class GridCreator extends Component {
       let chosenVal = hexValues.charAt(randIndex);
       colorConstructor += chosenVal;
     }
-    console.log(colorConstructor)
+    // console.log(colorConstructor)
     return colorConstructor;
   }
 
   onAddColorClick = () => {
-    console.log("plus clicked!");
+    // console.log("plus clicked!");
     let colorArray = [...this.state.gridColors];
     const randomHex = this.getRandomColor();
     colorArray.push(randomHex);
@@ -57,7 +79,7 @@ class GridCreator extends Component {
       this.setState({selectedColorIndex: index})
     } else {
       // open the color editor
-      console.log("editor opens")
+      // console.log("editor opens")
       this.setState({editingColor: true});
     }
   }
@@ -67,7 +89,7 @@ class GridCreator extends Component {
   }
 
   onColorChange = (color) => {
-    console.log(color.hex);
+    // console.log(color.hex);
     let colorArray = [...this.state.gridColors];
     colorArray[this.state.selectedColorIndex] = color.hex;
     this.setState({gridColors: colorArray});
@@ -120,12 +142,12 @@ class GridCreator extends Component {
   onMouseDownOnBox = (e) => {
     this.setState({startDraw: e.target.id})
     this.parsePositionAndSetState(e.target.id);
-    console.log(e.target.id);
+    // console.log(e.target.id);
   }
 
   onMouseEnterBox = (e) => {
     if (this.state.startDraw.length) {
-      console.log(e.target.id);
+      // console.log(e.target.id);
       this.parsePositionAndSetState(e.target.id)
     }    
   }
@@ -191,9 +213,11 @@ class GridCreator extends Component {
 
   render() {
     return (
-      <div>
-        This is the creator...
-        And it holds...
+      <div className="creatorContainer">
+        <div className="titleContainer" onClick={this.onTitleClick}>
+          <input className="titleInput" type="text" name="nonogramName" value={this.state.nonogramName} onChange={this.onTitleChange} />
+          <button className="submitBtn" onClick={this.onSubmit}>Submit Nonogram</button>
+        </div>
         <Grid
           gridHeight={this.state.gridHeight}
           gridWidth={this.state.gridWidth}
