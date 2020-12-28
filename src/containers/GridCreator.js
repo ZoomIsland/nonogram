@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Grid from '../components/Grid/Grid'
 
@@ -36,6 +37,8 @@ class GridCreator extends Component {
   }
 
   onSubmit = () => {
+    // alert: ask if they're ready to submit...
+
     // construct object for submission
     // this will need user info eventually
     const newNono = {
@@ -46,7 +49,16 @@ class GridCreator extends Component {
       colorArray: this.state.gridColors,
     }
     console.log(newNono);
+
     // send object to api
+    return axios.post("http://localhost:3001/nonogram/", newNono)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+
     // reroute page to Show page of that Nonogram?
   }
 
