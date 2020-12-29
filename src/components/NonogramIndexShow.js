@@ -1,5 +1,7 @@
 import './IndexShow.css';
 
+import { NavLink } from 'react-router-dom';
+
 function NonogramIndexShow(props) {
   function getImageStyle() {
     const width = (props.data.width * 5) + "px";
@@ -37,16 +39,18 @@ function NonogramIndexShow(props) {
   })
 
   return (
-    <div className="indexShowContainer">
-      <div className="nonogramVisual" style={getImageStyle()}>
-        {drawNonogram}
+    <NavLink to={`/nonograms/${props.data._id}`}>
+      <div className="indexShowContainer">
+        <div className="nonogramVisual" style={getImageStyle()}>
+          {drawNonogram}
+        </div>
+        <div className="indexDetails">
+          <h2>{props.data.title}</h2>
+          <h3>By Author</h3>
+          <h4>Size: {props.data.width} x {props.data.height}</h4>
+        </div>
       </div>
-      <div className="indexDetails">
-        <h2>{props.data.title}</h2>
-        <h3>By Author</h3>
-        <h4>Size: {props.data.width} x {props.data.height}</h4>
-      </div>
-    </div>
+    </NavLink>
   )
 }
 

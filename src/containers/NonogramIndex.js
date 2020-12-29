@@ -30,7 +30,10 @@ class NonogramIndex extends Component {
     })
 
     return (
-      <div>This is the index
+      <div>
+        <div className="filters">
+          Filters will live here eventually...
+        </div>
         {nonogramList}
       </div>
     )

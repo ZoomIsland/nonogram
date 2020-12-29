@@ -14,8 +14,11 @@ function NonogramRoutes(props) {
       <Route
         exact path="/nonograms/index"
         component={NonogramIndex} />
-      <Route
+      {/* <Route
         exact path="/nonograms/random"
+        component={NonogramShow} /> */}
+      <Route
+        path="/nonograms/:id"
         component={NonogramShow} />
     </Switch>
   )
