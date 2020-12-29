@@ -8,13 +8,9 @@ class NonogramShow extends Component {
     nonogramData: {}
   }
 
-  componentDidMount = () => {   
-    // id can be found at
-    // console.log(this.props.match.params.id)
-    if (this.props.match.params.id === "random") {
-      // run a different axios call...
-    }
-
+  componentDidMount = () => {
+    // this works for "random" or "id"
+    // because of how back-end is written
     axios.get(`http://localhost:3001/nonogram/${this.props.match.params.id}`)
       .then((response) => {
         console.log(response.data)
