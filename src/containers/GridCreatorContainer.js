@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Grid from '../components/Grid/Grid'
+import CreatorGrid from '../components/Grids/CreatorGrid'
 
 import './GridCreator.css';
 
-class GridCreator extends Component {
+class GridCreatorContainer extends Component {
   state = {
     nonogramName: "Untitled Nonogram",
     gridHeight: 15,
@@ -235,9 +235,7 @@ class GridCreator extends Component {
           <input className="titleInput" type="text" name="nonogramName" value={this.state.nonogramName} onChange={this.onTitleChange} />
           <button className="submitBtn" onClick={this.onSubmit}>Submit Nonogram</button>
         </div>
-        <Grid
-          gridHeight={this.state.gridHeight}
-          gridWidth={this.state.gridWidth}
+        <CreatorGrid
           gridColors={this.state.gridColors}
           selectedColorIndex={this.state.selectedColorIndex}
           gridAnswer={this.state.gridAnswer}
@@ -258,4 +256,4 @@ class GridCreator extends Component {
   }
 }
 
-export default GridCreator;
+export default GridCreatorContainer;

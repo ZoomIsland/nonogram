@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import GridCreator from '../containers/GridCreator';
+import GridCreatorContainer from '../containers/GridCreatorContainer';
 import NonogramIndex from '../containers/NonogramIndex';
 import NonogramShow from '../containers/NonogramShow';
 
@@ -10,7 +10,7 @@ function NonogramRoutes(props) {
     <Switch>
       <Route
         exact path='/nonograms/new'
-        component={GridCreator} />
+        component={GridCreatorContainer} />
       <Route
         exact path="/nonograms/index"
         component={NonogramIndex} />

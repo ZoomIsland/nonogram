@@ -3,6 +3,8 @@ function GridBox(props) {
   if (props.colorData !== "X") {
     const color = props.gridColors[props.colorData];
     boxStyle.backgroundColor = color;
+  } else {
+    boxStyle.backgroundColor = "white";
   }
 
   return (
