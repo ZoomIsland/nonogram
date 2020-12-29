@@ -1,5 +1,5 @@
 import ColorChooser from '../../containers/ColorChooser';
-import GridBox from '../GridBox';
+import Grid from '../Grid';
 
 import './CreatorGrid.css';
 
@@ -32,21 +32,6 @@ function CreatorGrid(props) {
     }
   })
 
-  const getBoxes = props.gridAnswer.map((row, rowIndex) => {
-    return (
-      <div className="gridRow" key={`row${rowIndex}`}>
-        {row.map((column, columnIndex) => <GridBox 
-                                          key={`r${rowIndex}c${columnIndex}`} 
-                                          position={`r${rowIndex}c${columnIndex}`}
-                                          gridColors={props.gridColors}
-                                          colorData={column}
-                                          onMouseDownOnBox={props.onMouseDownOnBox}
-                                          onMouseEnterBox={props.onMouseEnterBox}
-                                          onMouseUpOnBox={props.onMouseUpOnBox} />)}
-      </div>
-    )
-  })
-
   function calcGridStyle() {
     let style = {
       position: "relative"
@@ -73,26 +58,22 @@ function CreatorGrid(props) {
         }
       </div>
       <div className="gridActual" style={calcGridStyle()}>
-      {getBoxes}
-      <i className="fas fa-arrows-alt-h fa-3x controlSlider columnControl">
-        <span className="controlMinus" onClick={props.onColumnMinus}>-</span>
-        <span className="controlPlus" onClick={props.onColumnPlus}>+</span>
-      </i>
-      <i className="fas fa-arrows-alt-h fa-3x controlSlider rowControl">
-        <span className="controlMinus" onClick={props.onRowMinus}>-</span>
-        <span className="controlPlus" onClick={props.onRowPlus}>+</span>
-      </i>
-    </div>
-      {/* <CreatorGridActual 
-        gridAnswer={props.gridAnswer}
-        onColumnPlus={props.onColumnPlus}
-        onColumnMinus={props.onColumnMinus}
-        onRowPlus={props.onRowPlus}
-        onRowMinus={props.onRowMinus}
-        onMouseDownOnBox={props.onMouseDownOnBox}
-        onMouseEnterBox={props.onMouseEnterBox}
-        onMouseUpOnBox={props.onMouseUpOnBox}
-        gridColors={props.gridColors} /> */}
+        <Grid 
+          gridAnswer={props.gridAnswer}
+          gridColors={props.gridColors}
+          onMouseDownOnBox={props.onMouseDownOnBox}
+          onMouseEnterBox={props.onMouseEnterBox}
+          onMouseUpOnBox={props.onMouseUpOnBox} 
+        />
+        <i className="fas fa-arrows-alt-h fa-3x controlSlider columnControl">
+          <span className="controlMinus" onClick={props.onColumnMinus}>-</span>
+          <span className="controlPlus" onClick={props.onColumnPlus}>+</span>
+        </i>
+        <i className="fas fa-arrows-alt-h fa-3x controlSlider rowControl">
+          <span className="controlMinus" onClick={props.onRowMinus}>-</span>
+          <span className="controlPlus" onClick={props.onRowPlus}>+</span>
+        </i>
+      </div>
     </div>
   )
 }
