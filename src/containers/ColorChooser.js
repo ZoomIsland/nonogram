@@ -6,16 +6,17 @@ import './ColorChooser.css';
 import GridColor from '../components/GridColor/GridColor'
 
 class ColorChooser extends Component {
-  state={
-    hover: false
+  state = {
+    editingColor: false
   }
 
-  onMouseEnter = () => {
-    this.setState({hover: true});
-  }
-
-  onMouseLeave = () => {
-    this.setState({hover: false});
+  colorEditorToggle = (index) => {
+    if (this.state.editingColor) {
+      this.props.onColorEditorClose();
+    } else {
+      this.props.onColorClick(index);
+    }
+    this.setState({editingColor: !this.state.editingColor})
   }
 
   render() {
@@ -24,15 +25,16 @@ class ColorChooser extends Component {
         <GridColor 
                 color={this.props.color}
                 colorIndex={this.props.colorIndex}
-                selected={this.props.selected} 
-                onColorClick={this.props.onColorClick}
-                onMouseEnter={this.onMouseEnter}
-                onMouseLeave={this.onMouseLeave}
-                hover={this.state.hover}
+                // selected={this.props.selected} 
+                selectedColorIndex={this.props.selectedColorIndex}
+                // onColorClick={this.props.onColorClick}
+                onColorClick={this.colorEditorToggle}
+                // hover={this.state.hover}
               />
-        { this.props.editingColor ? <div className="popover"> 
+        { this.state.editingColor ? <div className="popover"> 
             <div className="cover" 
-                 onClick={this.props.onColorEditorClose} /> 
+                //  onClick={this.props.onColorEditorClose}
+                onClick={this.colorEditorToggle} /> 
             <ChromePicker 
               disableAlpha={true}
               color={this.props.color}

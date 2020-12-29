@@ -8,28 +8,29 @@ function CreatorGrid(props) {
   // it can also update the GridCreator component details, which will update its size, colors, and data
 
   const gridColors = props.gridColors.map((color, index) => {
-    if (props.selectedColorIndex === index) {
+    // if (props.selectedColorIndex === index) {
       return <ColorChooser 
             color={color} 
             key={index}
             colorIndex={index}
-            selected={"true"}
+            // selected={"true"}
+            selectedColorIndex={props.selectedColorIndex}
             onColorChange={props.onColorChange} 
             onColorClick={props.onColorClick}
             editingColor={props.editingColor}
             onColorEditorClose={props.onColorEditorClose}
           />
-    } else {
-      return <ColorChooser 
-              color={color} 
-              key={index}
-              colorIndex={index}
-              selected={"false"}
-              onColorChange={props.onColorChange} 
-              onColorClick={props.onColorClick} 
-              onColorEditorClose={props.onColorEditorClose}
-            />
-    }
+    // } else {
+    //   return <ColorChooser 
+    //           color={color} 
+    //           key={index}
+    //           colorIndex={index}
+    //           selected={"false"}
+    //           onColorChange={props.onColorChange} 
+    //           onColorClick={props.onColorClick} 
+    //           onColorEditorClose={props.onColorEditorClose}
+    //         />
+    // }
   })
 
   function calcGridStyle() {
