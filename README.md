@@ -8,23 +8,21 @@ A nonogram is a sudoku-like puzzle that is a color image when complete.
 To keep a solid focus throughout the holidays, Nono Yaya was built throughout the following sprints:
 
 **Sprint One: Nonogram Creator**
-
+*MVP completed on 12/18*
 Because I need data and the grid component will be useable later, I began with the Nonogram Creator. This meant that it's at the center of the design (not an afterthought), even though the future solving tools will be different.
 Functionality includes:
 * 8 distinct color options
 * Color chooser (from react-color)
 * Buttons to add columns and rows
 
-*MVP completed on 12/18&*
+
 
 **Sprint Two: Nonogram Database**
-
+*MVP completed on 12/29*
 Utilizing Node/Express, this database will store the arrays created by the creator. It will also have login capability--which will not be turned on until at least Sprint 4.
 Functionality includes:
-* User Database
-* Admin Database
 * Readied Nonogram Database
-* Full CRUD on Users and Nonograms (deletes connection, not full nonogram)
+* Full CRUD on Nonograms (deletes connection, not full nonogram)
 
 *Currently in progress*
 
@@ -33,14 +31,23 @@ Functionality includes:
 
 
 **Sprint Three: Nonogram Puzzle Viewer**
-
+*Currently in progress*
 This is how most users will approach the site. It is meant to be a simple and beautifully written viewer that allows for solving, searching, and scrolling.
 Functionality includes:
 * Nonogram solve page
 * Search by size
 * Nonogram index (5-10 total visible)
 
-**Sprint Four: Beautification**
+**Sprint Four: User/Admin tie-in**
+
+Once the Nonograms are able to be created, indexed, and solved, I will begin to tie-in Users and Admin into the site. Users will now be able to login to save a "solved" Nonogram. Admin will be able to see and approve/delete nonograms before they're visible on the Index.
+* User Database
+* Admin Database
+* User Profile pages on the front end
+* Admin page on front end
+
+
+**Sprint Five: Beautification**
 
 For all previous code, CSS will be heavily used in order to get a consistent theme and strong visibility on all current tools.
 Changes include:
@@ -51,14 +58,6 @@ Changes include:
 * About pages
 
 **This marks MVP.**
-
-**Sprint Five: Admin/User updates**
-I will continue iterating on Admin endpoints and create a front-end to review incoming Nonograms. User pages and endpoints will be updated, too.
-Functionality includes:
-* User Profile Page (which shows created and solved nonograms)
-* Admin front-end (for nonogram review/approval)
-* Updated User Model
-* Updated Admin functionality for the API
 
 **Sprint Six: Additional tools**
 These are the tools I think would be great to have:
