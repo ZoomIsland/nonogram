@@ -7,7 +7,8 @@ function SolverGrid(props) {
 
   const getColors = props.colors.map((color, index) => {
     return (
-      <GridColor 
+      <GridColor
+        gridType="solver" 
         color={color}
         colorIndex={index}
         selectedColorIndex={props.selectedColorIndex}

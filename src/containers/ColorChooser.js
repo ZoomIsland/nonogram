@@ -22,18 +22,15 @@ class ColorChooser extends Component {
   render() {
     return (
       <div className="creatorColorContainer">
-        <GridColor 
+        <GridColor
+                gridType={this.props.gridType} 
                 color={this.props.color}
                 colorIndex={this.props.colorIndex}
-                // selected={this.props.selected} 
                 selectedColorIndex={this.props.selectedColorIndex}
-                // onColorClick={this.props.onColorClick}
                 onColorClick={this.colorEditorToggle}
-                // hover={this.state.hover}
               />
         { this.state.editingColor ? <div className="popover"> 
-            <div className="cover" 
-                //  onClick={this.props.onColorEditorClose}
+            <div className="cover"
                 onClick={this.colorEditorToggle} /> 
             <ChromePicker 
               disableAlpha={true}

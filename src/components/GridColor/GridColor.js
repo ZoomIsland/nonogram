@@ -7,9 +7,11 @@ function GridColor(props) {
             style={{backgroundColor: props.color}}
             onClick={() => props.onColorClick(props.colorIndex)}
             >
-              <div className={"editBtn"}>
-                <p>Click to Edit</p>
-              </div>
+              {props.gridType === "creator" &&
+                <div className={"editBtn"}>
+                  <p>Click to Edit</p>
+                </div>
+              }
           </div>
   } else {
     return (
