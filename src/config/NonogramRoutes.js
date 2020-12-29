@@ -2,14 +2,21 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import GridCreator from '../containers/GridCreator';
+import NonogramIndex from '../containers/NonogramIndex';
+import NonogramShow from '../containers/NonogramShow';
 
 function NonogramRoutes(props) {
   return (
     <Switch>
       <Route
         exact path='/nonograms/new'
-        render={(props) => <GridCreator />} />
-      
+        component={GridCreator} />
+      <Route
+        exact path="/nonograms/index"
+        component={NonogramIndex} />
+      <Route
+        exact path="/nonograms/random"
+        component={NonogramShow} />
     </Switch>
   )
 }

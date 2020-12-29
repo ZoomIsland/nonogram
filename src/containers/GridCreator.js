@@ -45,7 +45,8 @@ class GridCreator extends Component {
       title: this.state.nonogramName,
       height: this.state.gridHeight,
       width: this.state.gridWidth,
-      nonogramString: this.state.gridAnswer.flat().join(''),
+      nonogramArray: this.state.gridAnswer,
+      // nonogramString: this.state.gridAnswer.flat().join(''),
       colorArray: this.state.gridColors,
     }
     console.log(newNono);
@@ -116,6 +117,7 @@ class GridCreator extends Component {
       answerArray[i].push("X");
     }
     this.setState({gridAnswer: answerArray});
+    this.setState({gridWidth: this.state.gridWidth + 1});
   }
   onColumnMinus = () => {
     // if (this.state.gridAnswer[0].length > 5) {
@@ -124,6 +126,7 @@ class GridCreator extends Component {
         answerArray[i].pop();
       }
       this.setState({gridAnswer: answerArray});
+      this.setState({gridWidth: this.state.gridWidth - 1});
     // }
   }
   onRowPlus = () => {
@@ -134,11 +137,13 @@ class GridCreator extends Component {
     }
     answerArray.push(newRow);
     this.setState({gridAnswer: answerArray});
+    this.setState({gridHeight: this.state.gridHeight + 1});
   }
   onRowMinus = () => {
     let answerArray = [...this.state.gridAnswer];
     answerArray.pop();
     this.setState({gridAnswer: answerArray});
+    this.setState({gridHeight: this.state.gridHeight - 1});
   }
 
   parsePositionAndSetState = (positionStr) => {

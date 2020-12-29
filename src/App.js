@@ -1,5 +1,4 @@
 import Nav from './components/Nav/Nav'
-import GridCreator from './containers/GridCreator'
 
 import NonogramRoutes from './config/NonogramRoutes';
 
@@ -10,7 +9,6 @@ function App() {
     <div className="App">
       <Nav />
       <NonogramRoutes />
-      {/* <GridCreator /> */}
       {/* Footer */}
     </div>
   );
