@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import NonogramSolver from '../components/NonogramSolver';
+import SolverGrid from '../components/Grids/SolverGrid';
 
 class NonogramShow extends Component {
   state = {
@@ -70,13 +70,68 @@ class NonogramShow extends Component {
     this.setState({startDraw: ""})
   }
 
+
+  // Do I want to use this for the solver?
+  // Draws in a straight line only
+  
+  // onMouseUpOnBox = (e) => {
+  //   // this should finalize endDraw;
+  //   const endDraw = e.target.id;
+  //   // it will setState of gridAnswer;
+  //   if (this.state.startDraw === endDraw) {
+  //     const position = this.parsePosition(this.state.startDraw);
+
+  //     const updatedAnswer = [...this.state.gridAnswer];
+  //     updatedAnswer[position.row][position.column] = this.state.selectedColorIndex;
+  //     this.setState({gridAnswer: updatedAnswer})
+  //   } else {
+  //     const startObj = this.parsePosition(this.state.startDraw);
+  //     const endObj = this.parsePosition(endDraw);
+  //     const updatedAnswer = [...this.state.gridAnswer];
+
+  //     // rows match, so the row can be updated
+  //     console.log ("rows match");
+  //     if (startObj.row === endObj.row) {
+  //       // for loop, start is startObj.column, end is endObj.column;
+  //       if (startObj.column > endObj.column) {
+  //         for (let i = endObj.column; i <= startObj.column; i++) {
+  //           updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
+  //         }
+  //       } else {
+  //         for (let i = startObj.column; i <= endObj.column; i++) {
+  //           updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
+  //         }
+  //       }
+        
+
+  //     // columns match, so the column can be updated
+  //     } else if (startObj.column === endObj.column) {
+  //       console.log("columns match");
+  //       // for loop, start is startObj.row, end is endObj.row;
+  //       if (startObj.row > endObj.row) {
+  //         for (let i = endObj.row; i <= startObj.row; i++) {
+  //           updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
+  //         }
+  //       } else {
+  //         for (let i = startObj.row; i <= endObj.row; i++) {
+  //           updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   // it will clear startDraw and endDraw;
+  //   this.setState({startDraw: ""})
+  //   console.log(e.target.id);
+  // }
+
   render() {
     return (
       // solved v unsolved switch?
       // One has solver, other has solution?
       // uncertain where "Solved" would live in the model
       <div className="showContainer">
-        <NonogramSolver 
+        <SolverGrid 
           data={this.state.nonogramData}
           colors={this.state.colors}
           selectedColorIndex={this.state.selectedColorIndex}

@@ -171,62 +171,7 @@ class GridCreatorContainer extends Component {
 
   onMouseUpOnBox = () => {
     this.setState({startDraw: ""})
-  }
-
-  //this is probably a great tool for the player
-  // for the Creator, it should probably just be the mouseenter changing things.
-  // onMouseUpOnBox = (e) => {
-  //   // this should finalize endDraw;
-  //   const endDraw = e.target.id;
-  //   // it will setState of gridAnswer;
-  //   if (this.state.startDraw === endDraw) {
-  //     const position = this.parsePosition(this.state.startDraw);
-
-  //     const updatedAnswer = [...this.state.gridAnswer];
-  //     updatedAnswer[position.row][position.column] = this.state.selectedColorIndex;
-  //     this.setState({gridAnswer: updatedAnswer})
-  //   } else {
-  //     const startObj = this.parsePosition(this.state.startDraw);
-  //     const endObj = this.parsePosition(endDraw);
-  //     const updatedAnswer = [...this.state.gridAnswer];
-
-  //     // rows match, so the row can be updated
-  //     console.log ("rows match");
-  //     if (startObj.row === endObj.row) {
-  //       // for loop, start is startObj.column, end is endObj.column;
-  //       if (startObj.column > endObj.column) {
-  //         for (let i = endObj.column; i <= startObj.column; i++) {
-  //           updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
-  //         }
-  //       } else {
-  //         for (let i = startObj.column; i <= endObj.column; i++) {
-  //           updatedAnswer[startObj.row][i] = this.state.selectedColorIndex;
-  //         }
-  //       }
-        
-
-  //     // columns match, so the column can be updated
-  //     } else if (startObj.column === endObj.column) {
-  //       console.log("columns match");
-  //       // for loop, start is startObj.row, end is endObj.row;
-  //       if (startObj.row > endObj.row) {
-  //         for (let i = endObj.row; i <= startObj.row; i++) {
-  //           updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
-  //         }
-  //       } else {
-  //         for (let i = startObj.row; i <= endObj.row; i++) {
-  //           updatedAnswer[i][startObj.column] = this.state.selectedColorIndex;
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   // it will clear startDraw and endDraw;
-  //   this.setState({startDraw: ""})
-  //   console.log(e.target.id);
-  // }
-
-  
+  }  
 
   render() {
     return (
