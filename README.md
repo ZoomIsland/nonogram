@@ -8,7 +8,9 @@ A nonogram is a sudoku-like puzzle that is a color image when complete.
 To keep a solid focus throughout the holidays, Nono Yaya was built throughout the following sprints:
 
 **Sprint One: Nonogram Creator**
+
 *MVP completed on 12/18*
+
 Because I need data and the grid component will be useable later, I began with the Nonogram Creator. This meant that it's at the center of the design (not an afterthought), even though the future solving tools will be different.
 Functionality includes:
 * 8 distinct color options
@@ -18,20 +20,22 @@ Functionality includes:
 
 
 **Sprint Two: Nonogram Database**
+
 *MVP completed on 12/29*
+
 Utilizing Node/Express, this database will store the arrays created by the creator. It will also have login capability--which will not be turned on until at least Sprint 4.
 Functionality includes:
 * Readied Nonogram Database
 * Full CRUD on Nonograms (deletes connection, not full nonogram)
-
-*Currently in progress*
 
 *** Early ERD ***
 ![ERD](/public/Nonogram-Early-ERD.png)
 
 
 **Sprint Three: Nonogram Puzzle Viewer**
+
 *Currently in progress*
+
 This is how most users will approach the site. It is meant to be a simple and beautifully written viewer that allows for solving, searching, and scrolling.
 Functionality includes:
 * Nonogram solve page
