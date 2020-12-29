@@ -1,0 +1,16 @@
+.indexShowContainer {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.nonogramVisual {
+  border: 1px solid black;
+}
+
+.indexDetails {
+  margin-left: 10px;
+}
+
+.nonoRowSmall {
+  display: flex;
+}
