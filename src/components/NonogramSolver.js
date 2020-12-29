@@ -9,6 +9,9 @@ function NonogramSolver(props) {
         colors={props.colors}
         selectedColorIndex={props.selectedColorIndex}
         onColorClick={props.onColorClick}
+        onMouseDownOnBox={props.onMouseDownOnBox}
+        onMouseEnterBox={props.onMouseEnterBox}
+        onMouseUpOnBox={props.onMouseUpOnBox}
         currentAttempt={props.currentAttempt}
       />
     </div>
