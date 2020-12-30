@@ -76,20 +76,7 @@ class NonogramShow extends Component {
     } else if (this.state.fillType === "X" || fillType === "X") {
       updatedAnswer[row][column] = "X";
     }
-    // if (type === 1) {
-    //   // if users get crazy, this starts looking crazy...
-    //   if (updatedAnswer[row][column] === this.state.selectedColorIndex) {
-    //     updatedAnswer[row][column] = "";
-    //   } else {
-    //     updatedAnswer[row][column] = this.state.selectedColorIndex;
-    //   }
-    // } else if (type === 3) {
-    //   if (updatedAnswer[row][column] === "X") {
-    //     updatedAnswer[row][column] = "";
-    //   } else {
-    //     updatedAnswer[row][column] = "X";
-    //   }
-    // }
+    
     this.setState({currentAttempt: updatedAnswer})
   }
 

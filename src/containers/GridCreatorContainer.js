@@ -14,6 +14,7 @@ class GridCreatorContainer extends Component {
     gridAnswer: [],
     selectedColorIndex: 0,
     editingColor: false,
+    fillType: "",
     startDraw: ""
   }
 
@@ -156,15 +157,33 @@ class GridCreatorContainer extends Component {
     this.setState({gridHeight: this.state.gridHeight - 1});
   }
 
-  parsePositionAndSetState = (positionStr, type) => {
+  parsePositionAndSetFill = (positionStr, type) => {
     const midpoint = positionStr.indexOf("c");
     const row = parseInt(positionStr.substring(1, midpoint));
     const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
 
     const updatedAnswer = [...this.state.gridAnswer];
-    if (type === 1) {
-      updatedAnswer[row][column] = this.state.selectedColorIndex;
+    if (type === 1 && this.state.selectedColorIndex === updatedAnswer[row][column]) {
+      this.setState({fillType: "X"});
+      return "X";
+    } else if (type === 1) {
+      this.setState({fillType: "index"});
+      return "index";
     } else if (type === 3) {
+      this.setState({fillType: "X"});
+      return "X";
+    }
+  }
+
+  parsePositionAndSetState = (positionStr, fillType = "") => {
+    const midpoint = positionStr.indexOf("c");
+    const row = parseInt(positionStr.substring(1, midpoint));
+    const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
+
+    const updatedAnswer = [...this.state.gridAnswer];
+   if (this.state.fillType === "index" || fillType === "index") {
+      updatedAnswer[row][column] = this.state.selectedColorIndex;
+    } else if (this.state.fillType === "X" || fillType === "X") {
       updatedAnswer[row][column] = "X";
     }
     this.setState({gridAnswer: updatedAnswer})
@@ -173,19 +192,20 @@ class GridCreatorContainer extends Component {
   onMouseDownOnBox = (e) => {
     const clickType = e.nativeEvent.which;
     this.setState({startDraw: e.target.id})
-    this.parsePositionAndSetState(e.target.id, clickType);
+    const fillType = this.parsePositionAndSetFill(e.target.id, clickType)
+    this.parsePositionAndSetState(e.target.id, fillType);
     // console.log(e.target.id);
   }
 
   onMouseEnterBox = (e) => {
-    const clickType = e.nativeEvent.which;
     if (this.state.startDraw.length) {
       // console.log(e.target.id);
-      this.parsePositionAndSetState(e.target.id, clickType)
+      this.parsePositionAndSetState(e.target.id)
     }    
   }
 
   onMouseUpOnBox = () => {
+    this.setState({fillType: ""})
     this.setState({startDraw: ""})
   }  
 

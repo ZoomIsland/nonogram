@@ -20,7 +20,7 @@ function Grid(props) {
   })
 
   return (
-    <div className="nonogramGrid">
+    <div className="nonogramGrid" onMouseLeave={props.onMouseUpOnBox}>
       {getBoxes}
     </div>
   )
