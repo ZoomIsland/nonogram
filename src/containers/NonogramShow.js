@@ -167,14 +167,15 @@ class NonogramShow extends Component {
           attempt[j][i] = answer[j][i];
         }
       }
-      if (allEqual) {
-        console.log("You did it!")
-        // likely I'll want to change make this into a modal
-        // and change what displays
-        // maybe make a call to the API to change this to "solved"
-        // which likely means an intermediary Model between user and puzzle
-      }
+      
       this.setState({currentAttempt: attempt})
+    }
+    if (allEqual) {
+      console.log("You did it!")
+      // likely I'll want to change make this into a modal
+      // and change what displays
+      // maybe make a call to the API to change this to "solved"
+      // which likely means an intermediary Model between user and puzzle
     }
   }
 
