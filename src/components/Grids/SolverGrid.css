@@ -1,3 +1,38 @@
 .solverColorContainer {
   display: flex;
 }
+
+.cluesAndGrid {
+  display: flex;
+}
+
+.columnClues {
+  display: flex;
+}
+
+.clueColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 25px;
+}
+
+.clueBox {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items:c enter
+}
+
+.rowClues {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.clueRow {
+  display: flex;
+  justify-content: flex-end;
+}
