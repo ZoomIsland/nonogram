@@ -114,6 +114,8 @@ class NonogramShow extends Component {
     const width = this.state.nonogramData.width;
     const height = this.state.nonogramData.height;
 
+    let allEqual = true;
+
     // testing Rows for now because it's easier
     for (let i = 0; i < height; i++) {
       let rowsEqual = true;
@@ -123,12 +125,14 @@ class NonogramShow extends Component {
         if (answer[i][j] === "X") {
           if (attempt[i][j] !== "" && attempt[i][j] !== "X") {
             rowsEqual = false;
+            allEqual = false;
           }
 
         // else answer is a number
         } else {
           if (attempt[i][j] !== answer[i][j]) {
             rowsEqual = false;
+            allEqual = false;
           }
         }
       }
@@ -147,12 +151,14 @@ class NonogramShow extends Component {
         if (answer[j][i] === "X") {
           if (attempt[j][i] !== "" && attempt[j][i] !== "X") {
             columnsEqual = false;
+            allEqual = false;
           }
 
         // else answer is a number
         } else {
           if (attempt[j][i] !== answer[j][i]) {
             columnsEqual = false;
+            allEqual = false;
           }
         }
       }
@@ -160,6 +166,13 @@ class NonogramShow extends Component {
         for (let j = 0; j < height; j++) {
           attempt[j][i] = answer[j][i];
         }
+      }
+      if (allEqual) {
+        console.log("You did it!")
+        // likely I'll want to change make this into a modal
+        // and change what displays
+        // maybe make a call to the API to change this to "solved"
+        // which likely means an intermediary Model between user and puzzle
       }
       this.setState({currentAttempt: attempt})
     }
