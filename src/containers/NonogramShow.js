@@ -29,7 +29,7 @@ class NonogramShow extends Component {
           currentAttempt.push(currentRow);
         }
         this.setState({currentAttempt});
-        setTimeout(()=>this.testSolution(), 500);
+        setTimeout(()=>this.testSolution(), 250);
       })
       .catch((err) => {
         console.log(err)
@@ -99,11 +99,13 @@ class NonogramShow extends Component {
   }
 
   onMouseUpOnBox = () => {
-    this.setState({fillType: ""});
-    this.setState({startDraw: ""});
-
-    // call the testSolution function with slight delay?
-    setTimeout(()=>this.testSolution(), 500)
+    if (this.state.startDraw.length) {
+      this.setState({fillType: ""});
+      this.setState({startDraw: ""});
+  
+      // call the testSolution function with slight delay?
+      setTimeout(()=>this.testSolution(), 250)
+    }
   }
 
   testSolution = () => {
@@ -131,7 +133,7 @@ class NonogramShow extends Component {
         }
       }
       if (rowsEqual) {
-        attempt[i] = answer[i];
+        attempt[i] = [...answer[i]];
       }
     }
     this.setState({currentAttempt: attempt})
