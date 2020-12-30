@@ -23,7 +23,7 @@ class NonogramShow extends Component {
         for (let i = 0; i < response.data.height; i++) {
           let currentRow = [];
           for (let j = 0; j < response.data.width; j++) {
-            currentRow.push("X");
+            currentRow.push("");
           }
           currentAttempt.push(currentRow);
         }
@@ -41,39 +41,45 @@ class NonogramShow extends Component {
   }
 
   // targets attempt instead of solution
-  parsePositionAndSetState = (positionStr) => {
+  parsePositionAndSetState = (positionStr, type) => {
     const midpoint = positionStr.indexOf("c");
     const row = parseInt(positionStr.substring(1, midpoint));
     const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
 
     const updatedAnswer = [...this.state.currentAttempt];
-    updatedAnswer[row][column] = this.state.selectedColorIndex;
+    if (type === 1) {
+      updatedAnswer[row][column] = this.state.selectedColorIndex;
+    } else if (type === 3) {
+      updatedAnswer[row][column] = "X";
+    }
     this.setState({currentAttempt: updatedAnswer})
   }
 
   // copy/pasted from GridCreatorContainer
   // which likely means this should go on Grid.
   onMouseDownOnBox = (e) => {
+    const clickType = e.nativeEvent.which;
     this.setState({startDraw: e.target.id})
-    this.parsePositionAndSetState(e.target.id);
     // console.log(e.target.id);
+    this.parsePositionAndSetState(e.target.id, clickType);
   }
 
   onMouseEnterBox = (e) => {
+    const clickType = e.nativeEvent.which;
     if (this.state.startDraw.length) {
       // console.log(e.target.id);
-      this.parsePositionAndSetState(e.target.id)
+      this.parsePositionAndSetState(e.target.id, clickType)
     }    
   }
 
   onMouseUpOnBox = () => {
-    this.setState({startDraw: ""})
+    this.setState({startDraw: ""});
   }
 
 
   // Do I want to use this for the solver?
   // Draws in a straight line only
-  
+
   // onMouseUpOnBox = (e) => {
   //   // this should finalize endDraw;
   //   const endDraw = e.target.id;

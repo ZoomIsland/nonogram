@@ -6,22 +6,6 @@
   cursor: pointer;
 }
 
-/* .gridActual in GridActul.js
-  position: relative;
-  width: changes with columns */
-
-.gridRow {
-  height: 25px;
-  width: auto;
-  display: flex;
-}
-.gridBox {
-  height: 25px;
-  width: 25px;
-  background: white;
-  border: 1px solid black;
-}
-
 /* plus/minus row/column control */
 .columnControl, .rowControl, .controlMinus, .controlPlus {
   position: absolute;

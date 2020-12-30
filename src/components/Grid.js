@@ -1,5 +1,7 @@
 import GridBox from './GridBox';
 
+import './Grid.css';
+
 function Grid(props) {
 
   const getBoxes = props.gridAnswer.map((row, rowIndex) => {

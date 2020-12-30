@@ -15,6 +15,9 @@ function GridBox(props) {
       onMouseEnter={props.onMouseEnterBox}
       onMouseUp={props.onMouseUpOnBox}
       style={boxStyle}>
+      {props.colorData === "X" &&
+        <div className="xBox"></div>
+      }
     </div>
   )
 }

@@ -146,26 +146,32 @@ class GridCreatorContainer extends Component {
     this.setState({gridHeight: this.state.gridHeight - 1});
   }
 
-  parsePositionAndSetState = (positionStr) => {
+  parsePositionAndSetState = (positionStr, type) => {
     const midpoint = positionStr.indexOf("c");
     const row = parseInt(positionStr.substring(1, midpoint));
     const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
 
     const updatedAnswer = [...this.state.gridAnswer];
-    updatedAnswer[row][column] = this.state.selectedColorIndex;
+    if (type === 1) {
+      updatedAnswer[row][column] = this.state.selectedColorIndex;
+    } else if (type === 3) {
+      updatedAnswer[row][column] = "X";
+    }
     this.setState({gridAnswer: updatedAnswer})
   }
 
   onMouseDownOnBox = (e) => {
+    const clickType = e.nativeEvent.which;
     this.setState({startDraw: e.target.id})
-    this.parsePositionAndSetState(e.target.id);
+    this.parsePositionAndSetState(e.target.id, clickType);
     // console.log(e.target.id);
   }
 
   onMouseEnterBox = (e) => {
+    const clickType = e.nativeEvent.which;
     if (this.state.startDraw.length) {
       // console.log(e.target.id);
-      this.parsePositionAndSetState(e.target.id)
+      this.parsePositionAndSetState(e.target.id, clickType)
     }    
   }
 
