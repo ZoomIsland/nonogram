@@ -29,6 +29,7 @@ class NonogramShow extends Component {
           currentAttempt.push(currentRow);
         }
         this.setState({currentAttempt});
+        setTimeout(()=>this.testSolution(), 500);
       })
       .catch((err) => {
         console.log(err)
@@ -76,7 +77,7 @@ class NonogramShow extends Component {
     } else if (this.state.fillType === "X" || fillType === "X") {
       updatedAnswer[row][column] = "X";
     }
-    
+
     this.setState({currentAttempt: updatedAnswer})
   }
 
@@ -100,8 +101,67 @@ class NonogramShow extends Component {
   onMouseUpOnBox = () => {
     this.setState({fillType: ""});
     this.setState({startDraw: ""});
+
+    // call the testSolution function with slight delay?
+    setTimeout(()=>this.testSolution(), 500)
   }
 
+  testSolution = () => {
+    const answer = [...this.state.nonogramData.nonogramArray];
+    const attempt = [...this.state.currentAttempt];
+    const width = this.state.nonogramData.width;
+    const height = this.state.nonogramData.height;
+
+    // testing Rows for now because it's easier
+    for (let i = 0; i < height; i++) {
+      let rowsEqual = true;
+      for (let j = 0; j < width; j++) {
+
+        // if answer is X
+        if (answer[i][j] === "X") {
+          if (attempt[i][j] !== "" && attempt[i][j] !== "X") {
+            rowsEqual = false;
+          }
+
+        // else answer is a number
+        } else {
+          if (attempt[i][j] !== answer[i][j]) {
+            rowsEqual = false;
+          }
+        }
+      }
+      if (rowsEqual) {
+        attempt[i] = answer[i];
+      }
+    }
+    this.setState({currentAttempt: attempt})
+
+    // testing Columns TK
+    for (let i = 0; i < width; i++) {
+      let columnsEqual = true;
+      for (let j = 0; j < height; j++) {
+
+        // if answer is X
+        if (answer[j][i] === "X") {
+          if (attempt[j][i] !== "" && attempt[j][i] !== "X") {
+            columnsEqual = false;
+          }
+
+        // else answer is a number
+        } else {
+          if (attempt[j][i] !== answer[j][i]) {
+            columnsEqual = false;
+          }
+        }
+      }
+      if (columnsEqual) {
+        for (let j = 0; j < height; j++) {
+          attempt[j][i] = answer[j][i];
+        }
+      }
+      this.setState({currentAttempt: attempt})
+    }
+  }
 
   // Do I want to use this for the solver?
   // Draws in a straight line only
