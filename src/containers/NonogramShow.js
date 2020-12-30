@@ -9,6 +9,7 @@ class NonogramShow extends Component {
     colors: [],
     selectedColorIndex: 0,
     currentAttempt: [],
+    fillType: "",
     startDraw: ""
   }
 
@@ -40,18 +41,55 @@ class NonogramShow extends Component {
     }
   }
 
-  // targets attempt instead of solution
-  parsePositionAndSetState = (positionStr, type) => {
+  parsePositionAndSetFill = (positionStr, type) => {
     const midpoint = positionStr.indexOf("c");
     const row = parseInt(positionStr.substring(1, midpoint));
     const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
 
     const updatedAnswer = [...this.state.currentAttempt];
-    if (type === 1) {
-      updatedAnswer[row][column] = this.state.selectedColorIndex;
+    if (type === 1 && this.state.selectedColorIndex === updatedAnswer[row][column]) {
+      this.setState({fillType: "empty"});
+      return "empty";
+    } else if (type === 1) {
+      this.setState({fillType: "index"});
+      return "index";
+    } else if (type === 3 && updatedAnswer[row][column] === "X") {
+      this.setState({fillType: "empty"});
+      return "empty";
     } else if (type === 3) {
+      this.setState({fillType: "X"});
+      return "X";
+    }
+  }
+
+  // targets attempt instead of solution
+  parsePositionAndSetState = (positionStr, fillType = "") => {
+    const midpoint = positionStr.indexOf("c");
+    const row = parseInt(positionStr.substring(1, midpoint));
+    const column = parseInt(positionStr.substring(midpoint + 1, positionStr.length));
+
+    const updatedAnswer = [...this.state.currentAttempt];
+    if (this.state.fillType === "empty" || fillType === "empty") {
+      updatedAnswer[row][column] = "";
+    } else if (this.state.fillType === "index" || fillType === "index") {
+      updatedAnswer[row][column] = this.state.selectedColorIndex;
+    } else if (this.state.fillType === "X" || fillType === "X") {
       updatedAnswer[row][column] = "X";
     }
+    // if (type === 1) {
+    //   // if users get crazy, this starts looking crazy...
+    //   if (updatedAnswer[row][column] === this.state.selectedColorIndex) {
+    //     updatedAnswer[row][column] = "";
+    //   } else {
+    //     updatedAnswer[row][column] = this.state.selectedColorIndex;
+    //   }
+    // } else if (type === 3) {
+    //   if (updatedAnswer[row][column] === "X") {
+    //     updatedAnswer[row][column] = "";
+    //   } else {
+    //     updatedAnswer[row][column] = "X";
+    //   }
+    // }
     this.setState({currentAttempt: updatedAnswer})
   }
 
@@ -61,18 +99,19 @@ class NonogramShow extends Component {
     const clickType = e.nativeEvent.which;
     this.setState({startDraw: e.target.id})
     // console.log(e.target.id);
-    this.parsePositionAndSetState(e.target.id, clickType);
+    const fillType = this.parsePositionAndSetFill(e.target.id, clickType);
+    this.parsePositionAndSetState(e.target.id, fillType);
   }
 
   onMouseEnterBox = (e) => {
-    const clickType = e.nativeEvent.which;
     if (this.state.startDraw.length) {
       // console.log(e.target.id);
-      this.parsePositionAndSetState(e.target.id, clickType)
+      this.parsePositionAndSetState(e.target.id);
     }    
   }
 
   onMouseUpOnBox = () => {
+    this.setState({fillType: ""});
     this.setState({startDraw: ""});
   }
 

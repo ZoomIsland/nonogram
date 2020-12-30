@@ -4,7 +4,10 @@
 }
 
 .nonogramVisual {
-  border: 1px solid black;
+  border: 2px double black;
+  border-radius: 5px;
+  overflow: hidden;
+  box-sizing: content-box;
 }
 
 .indexDetails {
@@ -13,4 +16,5 @@
 
 .nonoRowSmall {
   display: flex;
+  box-sizing: content-box;
 }

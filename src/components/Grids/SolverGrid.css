@@ -8,6 +8,7 @@
 
 .columnClues {
   display: flex;
+  margin-left: 4px;
 }
 
 .clueColumn {
@@ -20,19 +21,26 @@
 .clueBox {
   width: 25px;
   height: 25px;
-  border: 1px solid black;
+  border: .5px solid black;
   display: flex;
   justify-content: center;
-  align-items:c enter
+  align-items:center;
 }
 
 .rowClues {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin-bottom: 4px;
 }
 
 .clueRow {
   display: flex;
   justify-content: flex-end;
+}
+.clueRow:nth-child(5n) .clueBox {
+  border-bottom: 2px solid black;
+}
+.clueColumn:nth-child(5n) .clueBox {
+  border-right: 2px solid black;
 }

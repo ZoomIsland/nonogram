@@ -10,7 +10,7 @@ class GridCreatorContainer extends Component {
     nonogramName: "Untitled Nonogram",
     gridHeight: 15,
     gridWidth: 15,
-    gridColors: ['#FFFFFF'],
+    gridColors: [],
     gridAnswer: [],
     selectedColorIndex: 0,
     editingColor: false,
@@ -20,6 +20,13 @@ class GridCreatorContainer extends Component {
   componentDidMount = () => {
     // if utilizing for editing,
     // adjust below to an if statement (if new or api call is empty...)
+
+    //creating first color
+    const firstColor = this.getRandomColor();
+    let colorArray = [firstColor];
+    this.setState({gridColors: colorArray});
+
+    // creating grid of all Xs
     let gridArray = [];
     for (let i = 0; i < this.state.gridHeight; i++) {
       let rowArray = [];
@@ -72,6 +79,9 @@ class GridCreatorContainer extends Component {
       let randIndex = Math.floor(Math.random() * hexValues.length);
       let chosenVal = hexValues.charAt(randIndex);
       colorConstructor += chosenVal;
+    }
+    if (colorConstructor === "#FFFFFF") {
+      colorConstructor = this.getRandomColor();
     }
     // console.log(colorConstructor)
     return colorConstructor;
