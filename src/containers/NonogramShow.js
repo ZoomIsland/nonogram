@@ -6,6 +6,8 @@ import SolverGrid from '../components/Grids/SolverGrid';
 class NonogramShow extends Component {
   state = {
     nonogramData: {},
+    rowClues: [],
+    columnClues: [],
     colors: [],
     selectedColorIndex: 0,
     currentAttempt: [],
@@ -17,8 +19,31 @@ class NonogramShow extends Component {
     // this works for "random" or ":id"
     axios.get(`http://localhost:3001/nonogram/${this.props.match.params.id}`)
       .then((response) => {
+        // set nonogram Data
         this.setState({nonogramData: response.data});
-        this.setState({colors: response.data.colorArray})
+        this.setState({colors: response.data.colorArray});
+
+        //get and set clue row data
+        let rowClues = [];
+        for (let i = 0; i < response.data.height; i++) {
+          let tupleRows = this.getTupleArray(response.data.nonogramArray[i]);
+          rowClues.push(tupleRows);
+        }
+        this.setState({rowClues: rowClues});
+
+        //get and set clue column data
+        let columnClues = [];
+        for (let i = 0; i < response.data.width; i++) {
+          let column = [];
+          for (let j = 0; j < response.data.height; j++) {
+            column.push(response.data.nonogramArray[j][i]);
+          }
+          let tupleColumns = this.getTupleArray(column);
+          columnClues.push(tupleColumns);
+        }
+        this.setState({columnClues: columnClues});
+
+
         // create currentAttempt based on data...
         let currentAttempt = [];
         for (let i = 0; i < response.data.height; i++) {
@@ -34,6 +59,40 @@ class NonogramShow extends Component {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  getTupleArray = (array)  => {
+    let tupleArray = [];
+    let count = 0;
+    let prevColorIndex = array[0];
+    let colorIndex, nextColorIndex;
+    let index = 0;
+    while (index < array.length) {
+      colorIndex = array[index];
+
+      //current is X, previous is NOT.
+      if (colorIndex === "X" && count > 0) {
+        tupleArray.push([prevColorIndex, count])
+        count = 0;
+      // current is X, previous WAS.
+      } else if (colorIndex === "X") {
+        count = 0;
+      } else { // current is a digit
+        count++;
+        if (array[index + 1] !== -1) { // if there's a next digit to test
+          nextColorIndex = array[index + 1];
+          if (colorIndex !== nextColorIndex) {
+            tupleArray.push([colorIndex, count])
+            count = 0;
+          }
+        } else { // if it's the last one
+          tupleArray.push([colorIndex, count])
+        }
+      }
+      prevColorIndex = colorIndex;
+      index++;
+    }
+    return tupleArray;
   }
 
   onColorClick = (index) => {
@@ -241,6 +300,8 @@ class NonogramShow extends Component {
       <div className="showContainer">
         <SolverGrid 
           data={this.state.nonogramData}
+          rowClues={this.state.rowClues}
+          columnClues={this.state.columnClues}
           colors={this.state.colors}
           selectedColorIndex={this.state.selectedColorIndex}
           onColorClick={this.onColorClick}
