@@ -1,0 +1,26 @@
+.indexPageLinks {
+  display: flex;
+}
+
+.firstLink,
+.prevLink,
+.pageLink,
+.nextLink,
+.lastLink {
+  margin: 0px 5px;
+  cursor: pointer;
+  color: blue;
+}
+
+.currentPage {
+  margin: 0px 5px;
+  color: black;
+}
+
+.firstLink:hover,
+.prevLink:hover,
+.pageLink:hover,
+.nextLink:hover,
+.lastLink:hover {
+  text-decoration: underline;
+}
