@@ -44,6 +44,11 @@ Functionality includes:
 * Search by size
 * Nonogram index (5-10 total visible)
 
+*** Updated ERD ***
+Updated to store date info, array (instead of string), and connect Users to Nonograms so "solved" data can be stored.
+
+![UpdatedERD](/public/Jan2021ERD.png)
+
 **Sprint Four: User/Admin tie-in**
 
 Once the Nonograms are able to be created, indexed, and solved, I will begin to tie-in Users and Admin into the site. Users will now be able to login to save a "solved" Nonogram. Admin will be able to see and approve/delete nonograms before they're visible on the Index.
