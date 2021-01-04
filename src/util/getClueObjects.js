@@ -1,5 +1,8 @@
 function getClueObjects(array) {
-  // array of arrays arrives -- "nonogramData" from the API
+  // array of values arrives.
+  // from creator, options area only "X" or 0-7.
+  // from solver, could also be ""
+
   let tupleArray = [];
   let count = 0;
   let prevColorIndex = array[0];
@@ -10,7 +13,13 @@ function getClueObjects(array) {
 
     //current is X, previous is NOT.
     if (colorIndex === "X" && count > 0) {
-      tupleArray.push([prevColorIndex, count])
+      // tupleArray.push([prevColorIndex, count])
+      tupleArray.push(
+        {colorIndex: prevColorIndex,
+          count: count,
+          endIndex: index - 1,
+          solved: false}
+      )
       count = 0;
     // current is X, previous WAS.
     } else if (colorIndex === "X") {
@@ -20,11 +29,23 @@ function getClueObjects(array) {
       if (array[index + 1] !== -1) { // if there's a next digit to test
         nextColorIndex = array[index + 1];
         if (colorIndex !== nextColorIndex) {
-          tupleArray.push([colorIndex, count])
+          // tupleArray.push([colorIndex, count])
+          tupleArray.push(
+            {colorIndex: colorIndex,
+              count: count,
+              endIndex: index,
+              solved: false}
+          )
           count = 0;
         }
       } else { // if it's the last one
-        tupleArray.push([colorIndex, count])
+        // tupleArray.push([colorIndex, count])
+        tupleArray.push(
+          {colorIndex: colorIndex,
+            count: count,
+            endIndex: index,
+            solved: false}
+        )
       }
     }
     prevColorIndex = colorIndex;

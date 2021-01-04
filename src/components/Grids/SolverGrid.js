@@ -16,108 +16,29 @@ function SolverGrid(props) {
     )
   })
 
-  // function getTupleArray(array) {
-  //   let tupleArray = [];
-  //   let count = 0;
-  //   let prevColorIndex = array[0];
-  //   let colorIndex, nextColorIndex;
-  //   let index = 0;
-  //   while (index < array.length) {
-  //     colorIndex = array[index];
-
-  //     //current is X, previous is NOT.
-  //     if (colorIndex === "X" && count > 0) {
-  //       tupleArray.push([prevColorIndex, count])
-  //       count = 0;
-  //     // current is X, previous WAS.
-  //     } else if (colorIndex === "X") {
-  //       count = 0;
-  //     } else { // current is a digit
-  //       count++;
-  //       if (array[index + 1] !== -1) { // if there's a next digit to test
-  //         nextColorIndex = array[index + 1];
-  //         if (colorIndex !== nextColorIndex) {
-  //           tupleArray.push([colorIndex, count])
-  //           count = 0;
-  //         }
-  //       } else { // if it's the last one
-  //         tupleArray.push([colorIndex, count])
-  //       }
-  //     }
-  //     prevColorIndex = colorIndex;
-  //     index++;
-  //   }
-  //   return tupleArray;
-  // }
-
   const getColumnClues = props.columnClues.map(column => {
     return (
       <div className="clueColumn">
         {column.map(clues => {
           return (
-            <div className="clueBox" style={{backgroundColor: props.colors[clues[0]]}}>{clues[1]}</div>
+            <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>{clues.count}</div>
           )
         })}
       </div>
     )
   })
-
-  // function getColumnClues() {
-  //   // make array across columns to map across
-  //   // let columnArray = [];
-  //   // for (let i = 0; i < props.data.width; i++) {
-  //   //   let column = [];
-  //   //   for (let j = 0; j < props.data.height; j++) {
-  //   //     column.push(props.data.nonogramArray[j][i])
-  //   //   }
-  //   //   let tupleColumns = getTupleArray(column)
-  //   //   columnArray.push(tupleColumns)
-  //   // }
-
-  //   return columnArray.map(column => {
-  //     return (
-  //       <div className="clueColumn">
-  //         {column.map(clues => {
-  //           return (
-  //             <div className="clueBox" style={{backgroundColor: props.colors[clues[0]]}}>{clues[1]}</div>
-  //           )
-  //         })}
-  //       </div>
-  //     )
-  //   })
-  // }
 
   const getRowClues = props.rowClues.map(row => {
     return (
       <div className="clueRow">
         {row.map(clues => {
           return (
-            <div className="clueBox" style={{backgroundColor: props.colors[clues[0]]}}>{clues[1]}</div>
+            <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>{clues.count}</div>
           )
         })}
       </div>
     )
   })
-
-  // function getRowClues() {
-  //   // let rowArray = [];
-  //   // for (let i = 0; i < props.data.height; i++) {
-  //   //   let tupleRows = getTupleArray(props.data.nonogramArray[i])
-  //   //   rowArray.push(tupleRows);
-  //   // }
-
-  //   return rowArray.map(row => {
-  //     return (
-  //       <div className="clueRow">
-  //         {row.map(clues => {
-  //           return (
-  //             <div className="clueBox" style={{backgroundColor: props.colors[clues[0]]}}>{clues[1]}</div>
-  //           )
-  //         })}
-  //       </div>
-  //     )
-  //   })
-  // }
 
   return (
     <div className="solverActual">
