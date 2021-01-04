@@ -33,7 +33,11 @@ function SolverGrid(props) {
       <div className="clueRow">
         {row.map(clues => {
           return (
-            <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>{clues.count}</div>
+            <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
+              {clues.solved && 
+              <div className="clueX"></div>}
+              <p>{clues.count}</p>
+            </div>
           )
         })}
       </div>

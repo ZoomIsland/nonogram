@@ -131,8 +131,50 @@ class NonogramShow extends Component {
       this.setState({startDraw: ""});
   
       // call the testSolution function with slight delay?
-      setTimeout(()=>this.testSolution(), 250)
+      setTimeout(()=>{
+        this.testSolution()
+        this.testClues()}, 250)
     }
+  }
+
+  testClues = () => {
+    // TEST ROWS FIRST:
+    // make copy of rowClues
+    let rowCluesCopy = [...this.state.rowClues];
+    // console.log(rowCluesCopy)
+    let attemptCopy = [...this.state.currentAttempt];
+    // console.log(attemptCopy)
+    // for every row in Attempt
+    for (let i = 0; i < attemptCopy.length; i++) {
+      //run that row through getClueObjects
+      let attemptObjects = getClueObjects(attemptCopy[i]);
+      // console.log(attemptObjects)
+      //test each object in resulting array
+      for (let j = 0; j < attemptObjects.length; j++) {
+        // grab endIndex of object
+        let currentObj = attemptObjects[j];
+        let attemptEndIndex = currentObj.endIndex;
+        // run findIndex on rowClues[i] for endIndex: endIndex
+        let foundClueIndex = rowCluesCopy[i].findIndex(obj => obj.endIndex === attemptEndIndex);
+        // console.log("clueIndex: ", foundClueIndex)
+        if (foundClueIndex >= 0) {
+          // if found, test all keys (except solved)
+          let foundClue = rowCluesCopy[i][foundClueIndex];
+          // console.log("foundClue: ", foundClue)
+          if (currentObj.count === foundClue.count && currentObj.colorIndex === foundClue.colorIndex) {
+            // if all key/value pairs match, change solved (on rowClues copy) to true
+            foundClue.solved = true;
+          }
+        }
+      }
+    }
+    // console.log(rowCluesCopy)
+    // update rowClues in state
+    this.setState({rowClues:rowCluesCopy});
+
+
+    // NOW TEST COLUMNS:
+    // make copy of columnClues
   }
 
   testSolution = () => {
