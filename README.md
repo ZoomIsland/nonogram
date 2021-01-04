@@ -45,6 +45,7 @@ Functionality includes:
 * Nonogram index (5-10 total visible)
 
 *** Updated ERD ***
+
 Updated to store date info, array (instead of string), and connect Users to Nonograms so "solved" data can be stored.
 
 ![UpdatedERD](/public/Jan2021ERD.png)
