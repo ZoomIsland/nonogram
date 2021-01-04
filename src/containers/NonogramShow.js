@@ -141,26 +141,21 @@ class NonogramShow extends Component {
     // TEST ROWS FIRST:
     // make copy of rowClues
     let rowCluesCopy = [...this.state.rowClues];
-    // console.log(rowCluesCopy)
     let attemptCopy = [...this.state.currentAttempt];
-    // console.log(attemptCopy)
     // for every row in Attempt
     for (let i = 0; i < attemptCopy.length; i++) {
       //run that row through getClueObjects
-      let attemptObjects = getClueObjects(attemptCopy[i]);
-      // console.log(attemptObjects)
+      let attemptRowObjects = getClueObjects(attemptCopy[i]);
       //test each object in resulting array
-      for (let j = 0; j < attemptObjects.length; j++) {
+      for (let j = 0; j < attemptRowObjects.length; j++) {
         // grab endIndex of object
-        let currentObj = attemptObjects[j];
+        let currentObj = attemptRowObjects[j];
         let attemptEndIndex = currentObj.endIndex;
         // run findIndex on rowClues[i] for endIndex: endIndex
         let foundClueIndex = rowCluesCopy[i].findIndex(obj => obj.endIndex === attemptEndIndex);
-        // console.log("clueIndex: ", foundClueIndex)
         if (foundClueIndex >= 0) {
           // if found, test all keys (except solved)
           let foundClue = rowCluesCopy[i][foundClueIndex];
-          // console.log("foundClue: ", foundClue)
           if (currentObj.count === foundClue.count && currentObj.colorIndex === foundClue.colorIndex) {
             // if all key/value pairs match, change solved (on rowClues copy) to true
             foundClue.solved = true;
@@ -168,13 +163,44 @@ class NonogramShow extends Component {
         }
       }
     }
-    // console.log(rowCluesCopy)
     // update rowClues in state
     this.setState({rowClues:rowCluesCopy});
 
 
     // NOW TEST COLUMNS:
     // make copy of columnClues
+    let columnCluesCopy = [...this.state.columnClues];
+    // adjust attempt to be column-based...
+    let attemptInColumns = [];
+    for (let i = 0; i < this.state.nonogramData.width; i++) {
+      let column = [];
+      for (let j = 0; j < this.state.nonogramData.height; j++) {
+        column.push(attemptCopy[j][i]);
+      }
+      let columnObjects = getClueObjects(column);
+      attemptInColumns.push(columnObjects);
+    }
+
+    // now iterate across attempt like you did rows...
+    for (let k = 0; k < attemptInColumns.length; k++) {
+      for (let l = 0; l < attemptInColumns[k].length; l++) {
+        // grab endIndex of object
+        let currentObj = attemptInColumns[k][l];
+        let attemptEndIndex = currentObj.endIndex;
+        // run findIndex on columnClues[k] for endIndex: endIndex
+        let foundClueIndex = columnCluesCopy[k].findIndex(obj => obj.endIndex === attemptEndIndex);
+        if (foundClueIndex >= 0) {
+          // if found, test all keys (except solved)
+          let foundClue = columnCluesCopy[k][foundClueIndex];
+          if (currentObj.count === foundClue.count && currentObj.colorIndex === foundClue.colorIndex) {
+            // if all key/value pairs match, change solved (on rowClues copy) to true
+            foundClue.solved = true;
+          }
+        }
+      }
+    }
+    // update columnClues in state
+    this.setState({columnClues:columnCluesCopy});
   }
 
   testSolution = () => {

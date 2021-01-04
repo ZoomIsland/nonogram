@@ -20,9 +20,19 @@ function SolverGrid(props) {
     return (
       <div className="clueColumn">
         {column.map(clues => {
-          return (
-            <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>{clues.count}</div>
-          )
+          if (clues.solved) {
+            return (
+              <div className="clueBox solvedClue" style={{backgroundColor: props.colors[clues.colorIndex]}}>
+                <div className="clueX"></div>
+                <p>{clues.count}</p>
+              </div>
+            )
+          } else {
+            return (
+              <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
+                <p>{clues.count}</p>
+              </div>
+            )}
         })}
       </div>
     )
@@ -32,13 +42,19 @@ function SolverGrid(props) {
     return (
       <div className="clueRow">
         {row.map(clues => {
-          return (
-            <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-              {clues.solved && 
-              <div className="clueX"></div>}
-              <p>{clues.count}</p>
-            </div>
-          )
+          if (clues.solved) {
+            return (
+              <div className="clueBox solvedClue" style={{backgroundColor: props.colors[clues.colorIndex]}}>
+                <div className="clueX"></div>
+                <p>{clues.count}</p>
+              </div>
+            )
+          } else {
+            return (
+              <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
+                <p>{clues.count}</p>
+              </div>
+            )}
         })}
       </div>
     )

@@ -28,6 +28,10 @@
   position: relative;
 }
 
+.solvedClue {
+  opacity: .4;
+}
+
 .rowClues {
   display: flex;
   flex-direction: column;
