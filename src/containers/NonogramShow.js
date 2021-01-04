@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import getClueObjects from '../util/getClueObjects';
+
 import SolverGrid from '../components/Grids/SolverGrid';
 
 class NonogramShow extends Component {
@@ -26,7 +28,7 @@ class NonogramShow extends Component {
         //get and set clue row data
         let rowClues = [];
         for (let i = 0; i < response.data.height; i++) {
-          let tupleRows = this.getTupleArray(response.data.nonogramArray[i]);
+          let tupleRows = getClueObjects(response.data.nonogramArray[i]);
           rowClues.push(tupleRows);
         }
         this.setState({rowClues: rowClues});
@@ -38,7 +40,7 @@ class NonogramShow extends Component {
           for (let j = 0; j < response.data.height; j++) {
             column.push(response.data.nonogramArray[j][i]);
           }
-          let tupleColumns = this.getTupleArray(column);
+          let tupleColumns = getClueObjects(column);
           columnClues.push(tupleColumns);
         }
         this.setState({columnClues: columnClues});
