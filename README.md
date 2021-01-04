@@ -39,6 +39,8 @@ Functionality includes:
 This is how most users will approach the site. It is meant to be a simple and beautifully written viewer that allows for solving, searching, and scrolling.
 Functionality includes:
 * Nonogram solve page
+* Clues auto-creating from solution
+* Clues and gridBoxes auto-crossing off when correct
 * Search by size
 * Nonogram index (5-10 total visible)
 
