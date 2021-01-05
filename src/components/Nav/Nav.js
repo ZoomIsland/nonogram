@@ -7,7 +7,7 @@ function Nav() {
     <header>
       <div className="siteTitle">Nono Yaya</div>
       <div className="navLinks">
-        <NavLink to="/nonograms/index/0">
+        <NavLink to="/nonograms">
           <div className="allPuzzles">Puzzle Index</div>
         </NavLink>
         <span className="lineDivide">&nbsp;|&nbsp;</span>

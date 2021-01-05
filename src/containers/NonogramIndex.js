@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import { useParams } from 'react-router-dom';
+// import axios from 'axios';
 
 import NonogramIndexShow from '../components/NonogramIndexShow';
 import Pagination from '../components/Pagination';
+import IndexFilters from '../components/IndexFilters';
+import NonogramModel from '../models/nonograms';
 
 class NonogramIndex extends Component {
   state = {
     nonograms: [],
     totalNonograms: 0,
+    orderBy: "newest",
     currentPage: 0
   }
 
   componentDidMount = () => {
     // make an axios call for page 1 of ALL Nonograms
-    axios.get("http://localhost:3001/nonogram/index/0")
+    // axios.get(`http://localhost:3001/nonogram/index/0${this.state.currentPage}`)
+    NonogramModel.getFilteredNonograms(0)
       .then((response) => {
         this.setState({nonograms: response.data.nonograms});
         this.setState({totalNonograms: response.data.length});
@@ -25,7 +28,8 @@ class NonogramIndex extends Component {
   }
 
   onPageClick = (page) => {
-    axios.get(`http://localhost:3001/nonogram/index/${page}`)
+    // axios.get(`http://localhost:3001/nonogram/index/${page}`)
+    NonogramModel.getFilteredNonograms(page)
       .then((response) => {
         this.setState({nonograms: response.data.nonograms});
         this.setState({totalNonograms: response.data.length});
@@ -37,6 +41,9 @@ class NonogramIndex extends Component {
   }
 
   // when filters change, update state nonograms
+  onSelectChange = (e) => {
+    console.log(e.target.value)
+  }
 
   render() {
     const nonogramList = this.state.nonograms.map(nono => {
@@ -47,9 +54,7 @@ class NonogramIndex extends Component {
 
     return (
       <div>
-        <div className="filters">
-          Filters will live here eventually...
-        </div>
+        <IndexFilters onSelectChange={this.onSelectChange} />
         <Pagination 
           totalNonograms={this.state.totalNonograms} 
           onPageClick={this.onPageClick}

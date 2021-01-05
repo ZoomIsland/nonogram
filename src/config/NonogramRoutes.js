@@ -12,7 +12,7 @@ function NonogramRoutes(props) {
         exact path='/nonograms/new'
         component={GridCreatorContainer} />
       <Route
-        path="/nonograms/index/"
+        exact path="/nonograms/"
         component={NonogramIndex} />
       {/* <Route
         exact path="/nonograms/random"
