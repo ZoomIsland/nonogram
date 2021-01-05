@@ -14,7 +14,7 @@ class NonogramIndex extends Component {
   }
 
   componentDidMount = () => {
-    NonogramModel.getFilteredNonograms(0)
+    NonogramModel.getFilteredNonograms(0, this.state.orderBy)
       .then((response) => {
         this.setState({nonograms: response.data.nonograms});
         this.setState({totalNonograms: response.data.length});
@@ -25,7 +25,7 @@ class NonogramIndex extends Component {
   }
 
   onPageClick = (page) => {
-    NonogramModel.getFilteredNonograms(page)
+    NonogramModel.getFilteredNonograms(page, this.state.orderBy)
       .then((response) => {
         this.setState({nonograms: response.data.nonograms});
         this.setState({totalNonograms: response.data.length});
@@ -38,7 +38,16 @@ class NonogramIndex extends Component {
 
   // when filters change, update state nonograms
   onSelectChange = (e) => {
-    console.log(e.target.value)
+    this.setState({orderBy: e.target.value});
+    this.setState({currentPage: 0})
+    NonogramModel.getFilteredNonograms(0, e.target.value)
+    .then((response) => {
+      this.setState({nonograms: response.data.nonograms});
+      this.setState({totalNonograms: response.data.length});
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   render() {
