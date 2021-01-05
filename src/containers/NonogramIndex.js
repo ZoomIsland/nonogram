@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 
 import NonogramIndexShow from '../components/NonogramIndexShow';
 import Pagination from '../components/Pagination';
@@ -15,8 +14,6 @@ class NonogramIndex extends Component {
   }
 
   componentDidMount = () => {
-    // make an axios call for page 1 of ALL Nonograms
-    // axios.get(`http://localhost:3001/nonogram/index/0${this.state.currentPage}`)
     NonogramModel.getFilteredNonograms(0)
       .then((response) => {
         this.setState({nonograms: response.data.nonograms});
@@ -28,7 +25,6 @@ class NonogramIndex extends Component {
   }
 
   onPageClick = (page) => {
-    // axios.get(`http://localhost:3001/nonogram/index/${page}`)
     NonogramModel.getFilteredNonograms(page)
       .then((response) => {
         this.setState({nonograms: response.data.nonograms});

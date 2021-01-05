@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import getClueObjects from '../util/getClueObjects';
 
 import SolverGrid from '../components/Grids/SolverGrid';
+import NonogramModel from '../models/nonograms';
 
 class NonogramShow extends Component {
   state = {
@@ -19,7 +19,7 @@ class NonogramShow extends Component {
 
   componentDidMount = () => {
     // this works for "random" or ":id"
-    axios.get(`http://localhost:3001/nonogram/${this.props.match.params.id}`)
+    NonogramModel.getSingleNonogram(this.props.match.params.id)
       .then((response) => {
         // set nonogram Data
         this.setState({nonogramData: response.data});
