@@ -34,7 +34,7 @@ Functionality includes:
 
 **Sprint Three: Nonogram Puzzle Viewer**
 
-*Currently in progress*
+*MVP completed on 1/6*
 
 This is how most users will approach the site. It is meant to be a simple and beautifully written viewer that allows for solving, searching, and scrolling.
 Functionality includes:
@@ -43,6 +43,7 @@ Functionality includes:
 * Clues and gridBoxes auto-crossing off when correct
 * Search by size
 * Nonogram index (5-10 total visible)
+* Adding right-click functionality for whitespace/X
 
 *** Updated ERD ***
 
@@ -52,20 +53,23 @@ Updated to store date info, array (instead of string), and connect Users to Nono
 
 **Sprint Four: User/Admin tie-in**
 
+*Currently in progress*
+
 Once the Nonograms are able to be created, indexed, and solved, I will begin to tie-in Users and Admin into the site. Users will now be able to login to save a "solved" Nonogram. Admin will be able to see and approve/delete nonograms before they're visible on the Index.
 * User Database
 * Admin Database
 * User Profile pages on the front end
 * Admin page on front end
+* UserNonogram Model to store current solve array and "solved" Boolean
 
 
 **Sprint Five: Beautification**
 
 For all previous code, CSS will be heavily used in order to get a consistent theme and strong visibility on all current tools.
 Changes include:
+* Completion pop-up with congratulations
 * Main color and branding implemented
 * Streamlining of Nonogram viewer (both creator and solver)
-* Adding right-click functionality for whitespace/X
 * Decisions about nav functionality
 * About pages
 
@@ -77,7 +81,7 @@ These are the tools I think would be great to have:
 * Different solve tools (row/column restricted, freeform)
 * Review system
 * Help system
-* Automated Nonogram tester
+* Automated Nonogram tester (for solution? Already works for solver)
 * Nonogram Build visual (to show it being constructed before sent off)
 
 
