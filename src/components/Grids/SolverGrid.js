@@ -1,10 +1,11 @@
 import Grid from '../Grid';
 import GridColor from '../GridColor/GridColor';
 
+import getClueTextColor from '../../util/getClueTextColor';
+
 import './SolverGrid.css'
 
 function SolverGrid(props) {
-
   const getColors = props.colors.map((color, index) => {
     return (
       <GridColor
@@ -24,13 +25,13 @@ function SolverGrid(props) {
             return (
               <div className="clueBox solvedClue" style={{backgroundColor: props.colors[clues.colorIndex]}}>
                 <div className="clueX"></div>
-                <p>{clues.count}</p>
+                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
               </div>
             )
           } else {
             return (
               <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-                <p>{clues.count}</p>
+                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
               </div>
             )}
         })}
@@ -46,13 +47,13 @@ function SolverGrid(props) {
             return (
               <div className="clueBox solvedClue" style={{backgroundColor: props.colors[clues.colorIndex]}}>
                 <div className="clueX"></div>
-                <p>{clues.count}</p>
+                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
               </div>
             )
           } else {
             return (
               <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-                <p>{clues.count}</p>
+                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
               </div>
             )}
         })}
