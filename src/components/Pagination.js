@@ -1,7 +1,7 @@
 import './Pagination.css';
 
 function Pagination(props) {
-  const pages = Math.floor(props.totalNonograms / 2);
+  const pages = Math.floor(props.totalNonograms / 10);
   let pageDivs = [];
   for (let i = 0; i <= pages; i++) {
     pageDivs.push(i);

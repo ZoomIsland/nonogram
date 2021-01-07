@@ -14,7 +14,8 @@ class NonogramShow extends Component {
     selectedColorIndex: 0,
     currentAttempt: [],
     fillType: "",
-    startDraw: ""
+    startDraw: "",
+    stillWorking: false
   }
 
   componentDidMount = () => {
@@ -112,7 +113,8 @@ class NonogramShow extends Component {
   // which likely means this should go on Grid.
   onMouseDownOnBox = (e) => {
     const clickType = e.nativeEvent.which;
-    this.setState({startDraw: e.target.id})
+    this.setState({startDraw: e.target.id});
+    this.setState({stillWorking: true});
     // console.log(e.target.id);
     const fillType = this.parsePositionAndSetFill(e.target.id, clickType);
     this.parsePositionAndSetState(e.target.id, fillType);
@@ -129,11 +131,24 @@ class NonogramShow extends Component {
     if (this.state.startDraw.length) {
       this.setState({fillType: ""});
       this.setState({startDraw: ""});
-  
       // call the testSolution function with slight delay?
-      setTimeout(()=>{
-        this.testSolution()
-        this.testClues()}, 250)
+          //have state {stillWorking: false}
+          //on mousedown setState({stillWorking: true})
+      //on mouseup, setState({stillWorking: false})
+      //wait 1sec
+        //if stillWorking === false;
+        //run tests
+      this.setState({stillWorking: false});
+      setTimeout(() => {
+        if (!this.state.stillWorking) {
+          console.log("run the tests!")
+          this.testSolution()
+          this.testClues()
+        } else {
+          console.log("still working")
+        }
+      }, 3500)
+  
     }
   }
 
