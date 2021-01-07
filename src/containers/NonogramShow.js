@@ -13,9 +13,9 @@ class NonogramShow extends Component {
     colors: [],
     selectedColorIndex: 0,
     currentAttempt: [],
+    testedAttempt: [],
     fillType: "",
-    startDraw: "",
-    stillWorking: false
+    startDraw: ""
   }
 
   componentDidMount = () => {
@@ -57,7 +57,6 @@ class NonogramShow extends Component {
           currentAttempt.push(currentRow);
         }
         this.setState({currentAttempt});
-        setTimeout(()=>this.testSolution(), 250);
       })
       .catch((err) => {
         console.log(err)
@@ -114,7 +113,6 @@ class NonogramShow extends Component {
   onMouseDownOnBox = (e) => {
     const clickType = e.nativeEvent.which;
     this.setState({startDraw: e.target.id});
-    this.setState({stillWorking: true});
     // console.log(e.target.id);
     const fillType = this.parsePositionAndSetFill(e.target.id, clickType);
     this.parsePositionAndSetState(e.target.id, fillType);
@@ -131,36 +129,24 @@ class NonogramShow extends Component {
     if (this.state.startDraw.length) {
       this.setState({fillType: ""});
       this.setState({startDraw: ""});
-      // call the testSolution function with slight delay?
-          //have state {stillWorking: false}
-          //on mousedown setState({stillWorking: true})
-      //on mouseup, setState({stillWorking: false})
-      //wait 1sec
-        //if stillWorking === false;
-        //run tests
-      this.setState({stillWorking: false});
-      setTimeout(() => {
-        if (!this.state.stillWorking) {
-          console.log("run the tests!")
-          this.testSolution()
-          this.testClues()
-        } else {
-          console.log("still working")
-        }
-      }, 3500)
-  
+
+      console.log("run the tests!")
+      let attemptToTest = [...this.state.currentAttempt];
+      this.setState({testedAttempt: attemptToTest});
+      this.testSolution(attemptToTest);
+      this.testClues(attemptToTest); 
     }
   }
 
-  testClues = () => {
+  testClues = (attempt) => {
+    let nothingChanged = true;
     // TEST ROWS FIRST:
     // make copy of rowClues
     let rowCluesCopy = [...this.state.rowClues];
-    let attemptCopy = [...this.state.currentAttempt];
     // for every row in Attempt
-    for (let i = 0; i < attemptCopy.length; i++) {
+    for (let i = 0; i < attempt.length; i++) {
       //run that row through getClueObjects
-      let attemptRowObjects = getClueObjects(attemptCopy[i]);
+      let attemptRowObjects = getClueObjects(attempt[i]);
       //test each object in resulting array
       for (let j = 0; j < attemptRowObjects.length; j++) {
         // grab endIndex of object
@@ -174,15 +160,19 @@ class NonogramShow extends Component {
           if (currentObj.count === foundClue.count && currentObj.colorIndex === foundClue.colorIndex) {
             // if all key/value pairs match, change solved (on rowClues copy) to true
             foundClue.solved = true;
+            nothingChanged = false;
           }
         }
       }
     }
-    // update rowClues in state
-    this.setState({rowClues:rowCluesCopy});
+    if (!nothingChanged) {
+      // update rowClues in state
+      this.setState({rowClues:rowCluesCopy});
+    }
 
 
     // NOW TEST COLUMNS:
+    nothingChanged = true;
     // make copy of columnClues
     let columnCluesCopy = [...this.state.columnClues];
     // adjust attempt to be column-based...
@@ -190,7 +180,7 @@ class NonogramShow extends Component {
     for (let i = 0; i < this.state.nonogramData.width; i++) {
       let column = [];
       for (let j = 0; j < this.state.nonogramData.height; j++) {
-        column.push(attemptCopy[j][i]);
+        column.push(attempt[j][i]);
       }
       let columnObjects = getClueObjects(column);
       attemptInColumns.push(columnObjects);
@@ -210,23 +200,29 @@ class NonogramShow extends Component {
           if (currentObj.count === foundClue.count && currentObj.colorIndex === foundClue.colorIndex) {
             // if all key/value pairs match, change solved (on rowClues copy) to true
             foundClue.solved = true;
+            nothingChanged = false;
           }
         }
       }
     }
-    // update columnClues in state
-    this.setState({columnClues:columnCluesCopy});
+    if (!nothingChanged) {
+      // update columnClues in state
+      this.setState({columnClues:columnCluesCopy});
+    }
   }
 
-  testSolution = () => {
+  testSolution = (attempt) => {
+    console.log(attempt)
+    console.log("starting testSolution")
     const answer = [...this.state.nonogramData.nonogramArray];
-    const attempt = [...this.state.currentAttempt];
+    console.log(answer)
     const width = this.state.nonogramData.width;
     const height = this.state.nonogramData.height;
+    console.log(`Width: ${width} & ${height}`)
 
     let allEqual = true;
 
-    // testing Rows for now because it's easier
+    // testing Rows
     for (let i = 0; i < height; i++) {
       let rowsEqual = true;
       for (let j = 0; j < width; j++) {
@@ -247,10 +243,9 @@ class NonogramShow extends Component {
         }
       }
       if (rowsEqual) {
-        attempt[i] = [...answer[i]];
+        attempt[i] = answer[i];
       }
     }
-    this.setState({currentAttempt: attempt})
 
     // testing Columns TK
     for (let i = 0; i < width; i++) {
@@ -278,7 +273,8 @@ class NonogramShow extends Component {
         }
       }
       
-      this.setState({currentAttempt: attempt})
+      this.setState({testedAttempt: attempt});
+      this.setState({currentAttempt: attempt});
     }
     if (allEqual) {
       console.log("You did it!")
@@ -287,6 +283,7 @@ class NonogramShow extends Component {
       // maybe make a call to the API to change this to "solved"
       // which likely means an intermediary Model between user and puzzle
     }
+    console.log("finishing testSolution")
   }
 
   // Do I want to use this for the solver?
