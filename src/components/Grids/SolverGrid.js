@@ -8,6 +8,7 @@ function SolverGrid(props) {
   const getColors = props.colors.map((color, index) => {
     return (
       <GridColor
+        key={`color${index}`}
         gridType="solver" 
         color={color}
         colorIndex={index}
@@ -16,12 +17,13 @@ function SolverGrid(props) {
     )
   })
 
-  const getColumnClues = props.columnClues.map(column => {
+  const getColumnClues = props.columnClues.map((column, cIndex) => {
     return (
-      <div className="clueColumn">
-        {column.map(clues => {
+      <div className="clueColumn" key={`column${cIndex}`}>
+        {column.map((clues, rIndex) => {
             return (
-              <ClueBox 
+              <ClueBox
+                key={`c${cIndex}r${rIndex}`}
                 solved={clues.solved}
                 color={props.colors[clues.colorIndex]}
                 count={clues.count} />
@@ -31,12 +33,13 @@ function SolverGrid(props) {
     )
   })
 
-  const getRowClues = props.rowClues.map(row => {
+  const getRowClues = props.rowClues.map((row, rIndex) => {
     return (
-      <div className="clueRow">
-        {row.map(clues => {
+      <div className="clueRow" key={`row${rIndex}`}>
+        {row.map((clues, cIndex) => {
             return (
-              <ClueBox 
+              <ClueBox
+                key={`r${rIndex}c${cIndex}`}
                 solved={clues.solved}
                 color={props.colors[clues.colorIndex]}
                 count={clues.count} />
