@@ -1,7 +1,6 @@
 import Grid from '../Grid';
 import GridColor from '../GridColor/GridColor';
-
-import getClueTextColor from '../../util/getClueTextColor';
+import ClueBox from '../ClueBox';
 
 import './SolverGrid.css'
 
@@ -21,20 +20,13 @@ function SolverGrid(props) {
     return (
       <div className="clueColumn">
         {column.map(clues => {
-          if (clues.solved) {
             return (
-              <div className="clueBox solvedClue" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-                <div className="clueX"></div>
-                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
-              </div>
+              <ClueBox 
+                solved={clues.solved}
+                color={props.colors[clues.colorIndex]}
+                count={clues.count} />
             )
-          } else {
-            return (
-              <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
-              </div>
-            )}
-        })}
+          })}
       </div>
     )
   })
@@ -43,20 +35,13 @@ function SolverGrid(props) {
     return (
       <div className="clueRow">
         {row.map(clues => {
-          if (clues.solved) {
             return (
-              <div className="clueBox solvedClue" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-                <div className="clueX"></div>
-                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
-              </div>
+              <ClueBox 
+                solved={clues.solved}
+                color={props.colors[clues.colorIndex]}
+                count={clues.count} />
             )
-          } else {
-            return (
-              <div className="clueBox" style={{backgroundColor: props.colors[clues.colorIndex]}}>
-                <p style={getClueTextColor(props.colors[clues.colorIndex])}>{clues.count}</p>
-              </div>
-            )}
-        })}
+          })}
       </div>
     )
   })

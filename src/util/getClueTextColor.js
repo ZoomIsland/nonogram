@@ -1,8 +1,19 @@
-import getClueObjects from "./getClueObjects";
+function getClueTextColor(property, hexColor) {
+  let whiteStyle, blackStyle;
+  switch (property) {
+    case "text":
+      whiteStyle = {color: "white"};
+      blackStyle = {color: "black"};
+      break;
+    case "background":
+      whiteStyle = {backgroundColor: "white"};
+      blackStyle = {backgroundColor: "black"};
+      break;
+    default:
+      whiteStyle = {color: "white"};
+      blackStyle = {color: "black"};
 
-function getClueTextColor(hexColor) {
-  const whiteText = {color: "white"};
-  const blackText = {color: "black"};
+  }
   let redColor = parseInt(hexColor.substring(1,3), 16);
   let greenColor = parseInt(hexColor.substring(3, 5), 16);
   let blueColor = parseInt(hexColor.substring(5,7), 16);
@@ -12,9 +23,9 @@ function getClueTextColor(hexColor) {
   const brightness  =  Math.sqrt( (.241 * redColor * redColor) + (.691 * greenColor * greenColor) + (.068 * blueColor * blueColor));
 
   if (brightness > 130) {
-    return blackText;
+    return blackStyle;
   } else {
-    return whiteText;
+    return whiteStyle;
   }
 }
 
